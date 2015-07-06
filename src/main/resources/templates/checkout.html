@@ -1,82 +1,143 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	  xsi:schemaLocation="http://www.thymeleaf.org ">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org ">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<title>Mightymerce Checkout</title>
-	<style>
-		::-moz-selection {
-			background: #b3d4fc;
-			text-shadow: none;
-		}
+  <meta charset="utf-8" />
+  <title>Mighty Merce Checkout</title>
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-		::selection {
-			background: #b3d4fc;
-			text-shadow: none;
-		}
+  <link rel="stylesheet" href="assets/libs/assets/animate.css/animate.css" type="text/css" />
+  <link rel="stylesheet" href="assets/libs/assets/font-awesome/css/font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="assets/libs/assets/simple-line-icons/css/simple-line-icons.css" type="text/css" />
+  <link rel="stylesheet" href="assets/libs/jquery/bootstrap/dist/css/bootstrap.css" type="text/css" />
+  <link rel="stylesheet" href="assets/css/font.css" type="text/css" />
+  <link rel="stylesheet" href="assets/css/app.css" type="text/css" />
+  <link rel="stylesheet" href="assets/css/md.css" type="text/css" />
 
-		html {
-			padding: 30px 10px;
-			font-size: 20px;
-			line-height: 1.4;
-			color: #737373;
-			background: #f0f0f0;
-			-webkit-text-size-adjust: 100%;
-			-ms-text-size-adjust: 100%;
-		}
-
-		html,
-		input {
-			font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-		}
-
-		body {
-			max-width: 500px;
-			_width: 500px;
-			padding: 30px 20px 50px;
-			border: 1px solid #b3b3b3;
-			border-radius: 4px;
-			margin: 0 auto;
-			box-shadow: 0 1px 10px #a7a7a7, inset 0 1px 0 #fff;
-			background: #fcfcfc;
-		}
-
-		h1 {
-			margin: 0 10px;
-			font-size: 50px;
-			text-align: center;
-		}
-
-		h1 span {
-			color: #bbb;
-		}
-
-		h3 {
-			margin: 1.5em 0 0.5em;
-		}
-
-		p {
-			margin: 1em 0;
-		}
-
-		ul {
-			padding: 0 0 0 40px;
-			margin: 1em 0;
-		}
-
-		.container {
-			max-width: 380px;
-			_width: 380px;
-			margin: 0 auto;
-		}
-	</style>
 </head>
 <body>
-<div class="container">
-	<h1>Hello, <span>Some User</span>!</h1>
-	<h2>Your checkout request will be processed </h2>
-	<p th:text="'You are about to buy ' + ${articleName} + ' with ' + ${articleId} + '!' ">Hello, will just buy something</p>
-	<a th:href="${paypal}"><img src="https://www.paypalobjects.com/de_DE/DE/i/btn/btn_buynowCC_LG.gif" alt="Jetzt einfach, schnell und sicher online bezahlen – mit PayPal." /></a>
+<div class="app app-dock">
+<?php
+  echo getcwd();
+?>
+
+  <!-- content -->
+  <div id="content" class="app-content m-l-none" role="main">
+    <div class="app-content-body ">
+
+      <!-- main -->
+      <div class="col">
+        <div class="wrapper-md">
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+              <div class="panel b-a">
+                <div class="panel-heading"><img src="img/logo-main.png" alt="" /></div>
+                <img src="img/wine.png" class="img-full" />
+                <div class="bg-light lter b-b wrapper-md">
+                  <h1 class="h3 text-black" th:text="${articleName}"></h1>
+                </div>
+
+                <div class="panel-body wrapper-md">
+                  <div class="row">
+                    <article class="col-sm-7">
+                        <p><strong>3 Regionen, 6 Spitzenrieslinge:</strong><br/>
+                        Aus Rheinhessen, Pfalz und Rheingau stammen diese maximal unterschiedlichen Riesling-Preziosen.<span class="visible-xs" style="display:inline !important;">..</span></p>
+                        <p class="hidden-xs"><i>So macht Riesling schmecken lernen Spaß:</i> Egal ob mineralisch oder fruchtbetont, ob kraftvoll oder feminin - hier ist für jeden was dabei!</p>
+                    </article>
+                    <aside class="col-sm-5 pricingtable m-t-md">
+                      <div class="row">
+                        <div class="col-xs-6 col-sm-6 m-b-md">
+                          <span>Price per item:</span>
+                          <div class="h1 text-info">25,99 €</div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6">
+                          <form class="form-inline" role="form">
+                            <label class="col-md-12 control-label">Quantity</label>
+                            <div class="m-b"><input ui-jq="TouchSpin" type="text" value="1" class="form-control" data-min='1' data-max="10" data-step="1.0" data-decimals="0" /></div>
+                          </form>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="table-responsive col-xs-12 m-t-md m-b-md">
+                          <table class="table b-light">
+                            <tbody>
+                              <tr>
+                                <td>Subtotal</td>
+                                <td>25,99 €</td>
+                              </tr>
+                              <tr>
+                                <td>Shipping (Standard)</td>
+                                <td>4,90 €</td>
+                              </tr>
+                              <tr class="total">
+                                <td>Total</td>
+                                <td>30,89 €</td>
+                              </tr>
+                              <tr class="small">
+                                <td>incl. VAT</td>
+                                <td>5,89 €</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+
+                      <div class="col-md-12 text-center">
+                        <a th:href="${paypal}"><img src="https://www.paypalobjects.com/de_DE/DE/i/btn/btn_buynowCC_LG.gif" alt="Jetzt einfach, schnell und sicher online bezahlen – mit PayPal." /></a>
+                      </div>
+                      <div class="col-md-12 text-center m-b-sm">
+                        <p>or</p>
+                      </div>
+                      <div class="col-md-12 text-center">
+                        <button class="btn btn-info btn-addon btn-lg"><i class="fa fa-shopping-cart"></i>Go to Checkout</button>
+                      </div>
+
+                    </aside>
+                  </div>
+                </div>
+                <!-- / panel body -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <!-- / main -->
+  </div>
+  <!-- / content -->
+
+  <!-- footer -->
+  <footer id="footer" class="app-footer m-l-none" role="footer">
+    <div class="wrapper b-t bg-light text-center clearfix">
+      <p>&copy; Merchant Company<br/>
+      <a href="#">www.merchantcompany.com</a></p>
+
+      <ul class="navbar-nav nav">
+        <li><a href="#">Imprint</a></li>
+        <li><a href="#">Terms &amp; Conditions</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Return Policy</a></li>
+      </ul>
+    </div>
+    <div class="wrapper b-t bg-dark text-center">
+      <span class="pull-right"><a href="" ui-scroll="app" class="m-l-sm text-muted"><i class="fa fa-long-arrow-up"></i></a></span>
+        Powered by MightyMerce.
+    </div>
+  </footer>
+  <!-- / footer -->
+
 </div>
+
+<script src="../assets/libs/jquery/jquery/dist/jquery.js"></script>
+<script src="../assets/libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
+<script src="../assets/js/ui-load.js"></script>
+<script src="../assets/js/ui-jp.config.js"></script>
+<script src="../assets/js/ui-jp.js"></script>
+<script src="../assets/js/ui-nav.js"></script>
+<script src="../assets/js/ui-toggle.js"></script>
+
 </body>
 </html>

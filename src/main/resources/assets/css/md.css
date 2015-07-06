@@ -1,0 +1,84 @@
+.app-content-body {
+  padding-bottom: 0;
+}
+
+.panel-heading img {
+  height: 60px;
+  max-height: none;
+}
+
+
+.pricingtable .bootstrap-touchspin {
+  width: 120px;
+}
+
+.pricingtable .bootstrap-touchspin input {
+  text-align: center;
+}
+
+.pricingtable label {
+  padding-left: 0;
+}
+
+
+
+
+.table-responsive {
+  border: none;
+}
+
+.table > tbody > tr > td, .table > tbody > tr > th {
+  padding: 4px 0;
+  border: 0;
+}
+
+.table > tbody > tr > td:nth-child(2) {
+  text-align: right;
+}
+
+.table > tbody > tr.total > td {
+  border-top: 1px solid #ddd;
+  font-weight: bold;
+  font-size: 125%;
+}
+
+.table > tbody > tr.small > td {
+  font-size: 80%;
+  padding: 0;
+}
+
+
+
+.app-footer {
+  position: static;
+}
+
+.app-footer ul {
+  list-style: none;
+  margin: 0 auto;
+  float: none;
+  display: inline-block;
+}
+
+.app-footer ul li {
+  float: left;
+}
+
+.app-footer ul li a {
+  padding: 5px 10px;
+  color: #0CB7E1;
+}
+
+.app-footer .nav > li > a:hover, .app-footer .nav > li > a:focus {
+  background: none;
+}
+
+@media (max-width: 767px) {
+  .app-footer ul li {
+    float: none;
+  }
+  ul.navbar-nav > li > a {
+    box-shadow: none;
+    padding: 2px 0;
+  }
+}
