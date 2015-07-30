@@ -43,7 +43,8 @@ dependencies {
 }
 
 distDocker {
-    exposePort 8080
+    exposePort 8081
+    dryRun true
 }
 
 task wrapper(type: Wrapper) {
