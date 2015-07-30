@@ -7,6 +7,8 @@ import org.springframework.social.oauth2.TokenStrategy;
  * Created by agutheil on 11.05.15.
  */
 public class MightyCore extends AbstractOAuth2ApiBinding {
+    private String coreUrl;
+
     protected MightyCore() {
         super();
     }
@@ -19,14 +21,19 @@ public class MightyCore extends AbstractOAuth2ApiBinding {
         super(accessToken, tokenStrategy);
     }
 
+    protected MightyCore(String accessToken, TokenStrategy tokenStrategy, String coreUrl) {
+        super(accessToken, tokenStrategy);
+        this.coreUrl = coreUrl;
+    }
+
     public Article getArticle(String articleId) {
-        Article article = getRestTemplate().getForObject("http://localhost:8080/api/articles/"+articleId, Article.class);
+        Article article = getRestTemplate().getForObject(coreUrl+"/api/articles/"+articleId, Article.class);
         return article;
     }
 
     public void createOrder(Article article) {
         Order order = new Order();
         order.setTest(article.getArticleId());
-        getRestTemplate().postForObject("http://localhost:8080/api/socialOrders/",order,Order.class);
+        getRestTemplate().postForObject(coreUrl+"/api/socialOrders/",order,Order.class);
     }
 }

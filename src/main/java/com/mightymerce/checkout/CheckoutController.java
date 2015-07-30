@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.beans.factory.annotation.Value;
 
 @Controller
 @RequestMapping("/")
@@ -22,6 +23,9 @@ public class CheckoutController {
 
 
     private OAuth2Template oAuth2Template;
+
+    @Value("${mightymerce.coreUrl}")
+    private String coreUrl;
 
 
     private MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
@@ -37,7 +41,7 @@ public class CheckoutController {
     public String checkout(@PathVariable String articleId, Model model) {
         model.addAttribute("articleId", articleId);
         AccessGrant ag = oAuth2Template.exchangeCredentialsForAccess("admin", "admin",params);
-        MightyCore mightyCore = new MightyCore(ag.getAccessToken(), TokenStrategy.AUTHORIZATION_HEADER);
+        MightyCore mightyCore = new MightyCore(ag.getAccessToken(), TokenStrategy.AUTHORIZATION_HEADER, coreUrl);
         Article article = mightyCore.getArticle(articleId);
         //TODO: Darf erst übermittelt werden, wenn Paypal erfolgreich war
         mightyCore.createOrder(article);
