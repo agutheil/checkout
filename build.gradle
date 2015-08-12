@@ -12,13 +12,17 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'eclipse-wtp'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
 apply plugin: 'docker'
 
+group = 'com.mightymerce.checkout'
+version = '0.2.0'
+
 jar {
     baseName = 'mm-checkout'
-    version =  '0.1.0'
+    version =  '0.2.0'
 }
 
 repositories {

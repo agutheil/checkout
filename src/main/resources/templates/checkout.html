@@ -39,24 +39,83 @@
                 <div class="panel-body wrapper-md">
                   <div class="row">
                     <article class="col-sm-7">
-                        <p><strong>3 Regionen, 6 Spitzenrieslinge:</strong><br/>
-                        Aus Rheinhessen, Pfalz und Rheingau stammen diese maximal unterschiedlichen Riesling-Preziosen.<span class="visible-xs" style="display:inline !important;">..</span></p>
-                        <p class="hidden-xs"><i>So macht Riesling schmecken lernen Spaß:</i> Egal ob mineralisch oder fruchtbetont, ob kraftvoll oder feminin - hier ist für jeden was dabei!</p>
+                        <p th:text="${description}">Your description here</p>
                     </article>
                     <aside class="col-sm-5 pricingtable m-t-md">
                       <div class="row">
                         <div class="col-xs-6 col-sm-6 m-b-md">
                           <span>Price per item:</span>
-                          <div class="h1 text-info">25,99 €</div>
+                          <div class="h1 text-info" ><span th:text="${price}">25,99</span> €</div>
                         </div>
                         <div class="col-xs-6 col-sm-6">
-                          <form class="form-inline" role="form">
-                            <label class="col-md-12 control-label">Quantity</label>
-                            <div class="m-b"><input ui-jq="TouchSpin" type="text" value="1" class="form-control" data-min='1' data-max="10" data-step="1.0" data-decimals="0" /></div>
-                          </form>
+                        
+                        <!--  start pp -->
+                        <form class="form-inline" role="form" action="http://localhost:8080/paypal/Checkout" method="POST">
+                        	  <div class="table-responsive col-xs-12 m-t-md m-b-md">
+                        	  <!-- start table -->
+                        	  <table>
+                        <tbody><tr><td>Item Name:</td><td><input type="text" name="L_PAYMENTREQUEST_0_NAME0" th:value="${articleName}" /></td></tr>
+                        <tr><td>Item ID: </td><td><input type="text" name="L_PAYMENTREQUEST_0_NUMBER0" th:value="${articleId}" /></td></tr>
+                        <tr><td>Description:</td><td><input type="text" name="L_PAYMENTREQUEST_0_DESC0" th:value="${decription}" /></td></tr>
+                        <tr><td>Quantity:</td><td><input type="text" name="L_PAYMENTREQUEST_0_QTY0" value="1" readonly="" /></td></tr>
+                        <tr><td>Price:</td><td><input type="text" name="PAYMENTREQUEST_0_ITEMAMT" th:value="${price}" readonly="" /></td></tr>
+                        
+                        <tr><td>Tax:</td><td><input type="text" name="PAYMENTREQUEST_0_TAXAMT" th:value="${tax}" readonly="" /></td></tr>
+                        <tr><td>Shipping Amount:</td><td><input type="text" name="PAYMENTREQUEST_0_SHIPPINGAMT" th:value="${shippingAmt}" readonly="" /></td></tr>
+                        <tr><td>Handling Amount:</td><td><input type="text" name="PAYMENTREQUEST_0_HANDLINGAMT" th:value="${handlingAmt}" readonly="" /></td></tr>
+                        <tr><td>Shipping Discount:</td><td><input type="text" name="PAYMENTREQUEST_0_SHIPDISCAMT" th:value="${handlingDsc}" readonly="" /></td></tr>
+                        <tr><td>Insurance Amount:</td><td><input type="text" name="PAYMENTREQUEST_0_INSURANCEAMT" th:value="${insuranceAmt}" readonly="" /></td></tr>
+                        
+                        <tr><td>Total Amount:</td><td><input type="text" name="PAYMENTREQUEST_0_AMT" th:value="${price} + ${tax} + ${shippingAmt} + ${handlingAmt} + ${handlingDsc} + ${insuranceAmt}" readonly="" /></td></tr>
+                        <tr><td>
+                        
+                        <input type="hidden" name="LOGOIMG" value="http://localhost:8080/paypal/img/logo.jpg" /></td></tr>
+                        <tr><td>Currency Code:</td><td>
+                        <select id="currencyCodeType" name="currencyCodeType">
+							<option selected="" value="USD">USD</option>
+							<option value="AUD">AUD</option>
+							<option value="BRL">BRL</option>
+							<option value="AUD">AUD</option>
+							<option value="CAD">CAD</option>
+							<option value="CZK">CZK</option>
+							<option value="DKK">DKK</option>
+							<option value="EUR">EUR</option>
+							<option value="HKD">HKD</option>
+							<option value="HUF">HUF</option>
+							<option value="ILS">ILS</option>
+							<option value="JPY">JPY</option>
+							<option value="NOK">NOK</option>
+							<option value="MXN">MXN</option>
+							<option value="NZD">NZD</option>
+							<option value="PHP">PHP</option>
+							<option value="PLN">PLN</option>
+							<option value="GBP">GBP</option>
+							<option value="SGD">SGD</option>
+							<option value="SEK">SEK</option>
+							<option value="CHF">CHF</option>
+							<option value="TWD">TWD</option>
+							<option value="THB">THB</option>
+							<option value="TRY">TRY</option>
+                        </select>
+                        <br /></td></tr>
+                        <tr><td>Payment Type: </td><td><select name="paymentType">
+                                 <option value="Sale">Sale</option>
+                                 <option value="Authorization">Authorization</option>
+                                 <option value="Order">Order</option>
+                               </select><br /></td></tr>                        
+						<tr><td colspan="2"><br /><br /><div id="myContainer"></div></td></tr>
+						<tr><td> -- OR -- </td></tr>
+						<tr><td><input type="Submit" alt="Proceed to Check out" class="btn btn-primary btn-large" value="Proceed to Check out" name="checkout" /></td></tr>
+                        </tbody></table>
+                        	  <!-- end table -->
+	                        </div>
+                        	  
+						</form>
+                        <!-- end pp -->
                         </div>
                       </div>
 
+<!-- 
                       <div class="row">
                         <div class="table-responsive col-xs-12 m-t-md m-b-md">
                           <table class="table b-light">
@@ -82,6 +141,7 @@
                         </div>
                       </div>
 
+					  
                       <div class="col-md-12 text-center">
                         <a th:href="${paypal}"><img src="https://www.paypalobjects.com/de_DE/DE/i/btn/btn_buynowCC_LG.gif" alt="Jetzt einfach, schnell und sicher online bezahlen – mit PayPal." /></a>
                       </div>
@@ -91,7 +151,7 @@
                       <div class="col-md-12 text-center">
                         <button class="btn btn-info btn-addon btn-lg"><i class="fa fa-shopping-cart"></i>Go to Checkout</button>
                       </div>
-
+ -->
                     </aside>
                   </div>
                 </div>
@@ -128,6 +188,15 @@
 
 </div>
 
+<script type="text/javascript">
+window.paypalCheckoutReady = function () {
+paypal.checkout.setup('Your merchant email id', {
+container: 'myContainer', //{String|HTMLElement|Array} where you want the PayPal button to reside
+environment: 'sandbox' //or 'production' depending on your environment
+});
+};
+</script>
+<script src="//www.paypalobjects.com/api/checkout.js" async="async"></script>
 <script src="/libs/jquery/jquery/dist/jquery.js"></script>
 <script src="/libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
 <script src="/js/ui-load.js"></script>

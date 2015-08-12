@@ -1,5 +1,7 @@
 package com.mightymerce.checkout;
 
+import java.math.BigDecimal;
+
 import javax.inject.Inject;
 
 import org.springframework.social.facebook.api.Facebook;
@@ -44,9 +46,19 @@ public class CheckoutController {
         MightyCore mightyCore = new MightyCore(ag.getAccessToken(), TokenStrategy.AUTHORIZATION_HEADER, coreUrl);
         Article article = mightyCore.getArticle(articleId);
         //TODO: Darf erst übermittelt werden, wenn Paypal erfolgreich war
-        mightyCore.createOrder(article);
+//        mightyCore.createOrder(article);
         model.addAttribute("articleName",article.getName());
         model.addAttribute("paypal",article.getPaypal());
+        model.addAttribute("price",article.getPrice());
+        model.addAttribute("currency",article.getCurrency());
+        model.addAttribute("decription",article.getDescription());
+        model.addAttribute("tax",BigDecimal.valueOf(2));
+        model.addAttribute("shippingAmt",BigDecimal.valueOf(5));
+        model.addAttribute("handlingAmt",BigDecimal.valueOf(1));
+        model.addAttribute("handlingDsc",BigDecimal.valueOf(-3));
+        model.addAttribute("insuranceAmt",BigDecimal.valueOf(2));
+        
+        
         return "checkout";
     }
 
