@@ -28,6 +28,9 @@ public class CheckoutController {
 
     @Value("${mightymerce.coreUrl}")
     private String coreUrl;
+    
+    @Value("${mightymerce.paypalUrl}")
+    private String paypalUrl;
 
 
     private MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
@@ -57,7 +60,8 @@ public class CheckoutController {
         model.addAttribute("handlingAmt",BigDecimal.valueOf(1));
         model.addAttribute("handlingDsc",BigDecimal.valueOf(-3));
         model.addAttribute("insuranceAmt",BigDecimal.valueOf(2));
-        
+        // 
+        model.addAttribute("paypalUrl",paypalUrl);
         
         return "checkout";
     }
