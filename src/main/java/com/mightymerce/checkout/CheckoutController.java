@@ -54,7 +54,7 @@ public class CheckoutController {
         model.addAttribute("paypal",article.getPaypal());
         model.addAttribute("price",article.getPrice());
         model.addAttribute("currency",article.getCurrency());
-        model.addAttribute("decription",article.getDescription());
+        model.addAttribute("description",article.getDescription());
         model.addAttribute("tax",BigDecimal.valueOf(2));
         model.addAttribute("shippingAmt",BigDecimal.valueOf(5));
         model.addAttribute("handlingAmt",BigDecimal.valueOf(1));

@@ -38,34 +38,36 @@
 
                 <div class="panel-body wrapper-md">
                   <div class="row">
-                    <article class="col-sm-7">
-                        <p th:text="${description}">Your description here</p>
-                    </article>
-                    <aside class="col-sm-5 pricingtable m-t-md">
-                      <div class="row">
+                    <article class="col-sm-5">
+                    <table>
+                        <tbody>
+                    	<tr><td>Item Name:</td><td><span th:text="${articleName}" ></span></td></tr>
+                        <tr><td>Item ID: </td><td><span th:text="${articleId}" ></span></td></tr>
+                        <tr><td>Description:</td><td><span th:text="${description}" ></span></td></tr>
+                        <tr><td>Quantity:</td><td><span>1</span></td></tr>
+                        </tbody>
+                        </table>
                         <div class="col-xs-6 col-sm-6 m-b-md">
                           <span>Price per item:</span>
                           <div class="h1 text-info" ><span th:text="${price}">25,99</span> €</div>
                         </div>
-                        <div class="col-xs-6 col-sm-6">
+                    </article>
+                    <aside class="col-sm-7 pricingtable m-t-md">
+                      <div class="row">
+                        <div class="col-xs-7 col-sm-12">
                         
                         <!--  start pp -->
                         <form class="form-inline" role="form" th:action="${paypalUrl}" method="POST">
                         	  <div class="table-responsive col-xs-12 m-t-md m-b-md">
                         	  <!-- start table -->
                         	  <table>
-                        <tbody><tr><td>Item Name:</td><td><input type="text" name="L_PAYMENTREQUEST_0_NAME0" th:value="${articleName}" /></td></tr>
-                        <tr><td>Item ID: </td><td><input type="text" name="L_PAYMENTREQUEST_0_NUMBER0" th:value="${articleId}" /></td></tr>
-                        <tr><td>Description:</td><td><input type="text" name="L_PAYMENTREQUEST_0_DESC0" th:value="${decription}" /></td></tr>
-                        <tr><td>Quantity:</td><td><input type="text" name="L_PAYMENTREQUEST_0_QTY0" value="1" readonly="" /></td></tr>
+                        <tbody>
                         <tr><td>Price:</td><td><input type="text" name="PAYMENTREQUEST_0_ITEMAMT" th:value="${price}" readonly="" /></td></tr>
-                        
                         <tr><td>Tax:</td><td><input type="text" name="PAYMENTREQUEST_0_TAXAMT" th:value="${tax}" readonly="" /></td></tr>
                         <tr><td>Shipping Amount:</td><td><input type="text" name="PAYMENTREQUEST_0_SHIPPINGAMT" th:value="${shippingAmt}" readonly="" /></td></tr>
                         <tr><td>Handling Amount:</td><td><input type="text" name="PAYMENTREQUEST_0_HANDLINGAMT" th:value="${handlingAmt}" readonly="" /></td></tr>
                         <tr><td>Shipping Discount:</td><td><input type="text" name="PAYMENTREQUEST_0_SHIPDISCAMT" th:value="${handlingDsc}" readonly="" /></td></tr>
                         <tr><td>Insurance Amount:</td><td><input type="text" name="PAYMENTREQUEST_0_INSURANCEAMT" th:value="${insuranceAmt}" readonly="" /></td></tr>
-                        
                         <tr><td>Total Amount:</td><td><input type="text" name="PAYMENTREQUEST_0_AMT" th:value="${price} + ${tax} + ${shippingAmt} + ${handlingAmt} + ${handlingDsc} + ${insuranceAmt}" readonly="" /></td></tr>
                         <tr><td>
                         
