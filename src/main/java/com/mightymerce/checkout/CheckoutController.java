@@ -48,8 +48,6 @@ public class CheckoutController {
         AccessGrant ag = oAuth2Template.exchangeCredentialsForAccess("admin", "admin",params);
         MightyCore mightyCore = new MightyCore(ag.getAccessToken(), TokenStrategy.AUTHORIZATION_HEADER, coreUrl);
         Article article = mightyCore.getArticle(articleId);
-        //TODO: Darf erst übermittelt werden, wenn Paypal erfolgreich war
-//        mightyCore.createOrder(article);
         model.addAttribute("articleName",article.getName());
         model.addAttribute("paypal",article.getPaypal());
         model.addAttribute("price",article.getPrice());

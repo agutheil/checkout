@@ -47,7 +47,7 @@ dependencies {
 }
 
 distDocker {
-    exposePort 8081
+    exposePort 80
     dryRun true
 }
 

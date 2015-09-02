@@ -62,6 +62,8 @@
                         	  <!-- start table -->
                         	  <table>
                         <tbody>
+                        <tr><td>Item Name:</td><td><input type="text" name="L_PAYMENTREQUEST_0_NAME0" th:value="${articleName}" readonly=""></input></td></tr>
+                        <tr><td>Item ID: </td><td><input type="text" name="L_PAYMENTREQUEST_0_NUMBER0" th:value="${articleId}" readonly=""></input></td></tr>
                         <tr><td>Price:</td><td><input type="text" name="PAYMENTREQUEST_0_ITEMAMT" th:value="${price}" readonly="" /></td></tr>
                         <tr><td>Tax:</td><td><input type="text" name="PAYMENTREQUEST_0_TAXAMT" th:value="${tax}" readonly="" /></td></tr>
                         <tr><td>Shipping Amount:</td><td><input type="text" name="PAYMENTREQUEST_0_SHIPPINGAMT" th:value="${shippingAmt}" readonly="" /></td></tr>
