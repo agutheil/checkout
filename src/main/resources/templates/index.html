@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Mighty Merce Checkout</title>
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+  <link rel="stylesheet" href="css/style-min.css" type="text/css" />
+
+</head>
+<body>
+<div class="app app-dock">
+
+  <!-- content -->
+  <div id="content" class="app-content m-l-none" role="main">
+    <div class="app-content-body ">
+
+      <!-- main -->
+      <div class="col">
+        <div class="wrapper-md">
+          <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+              <div class="panel b-a">
+                <div class="panel-heading">
+                  <a href="#/">
+                    <img src="img/logo.gif" alt=".">
+                  </a>
+                </div>
+                <img src="img/image_PP_GROss_1.jpg" class="teaser-img">
+                <button class="btn m-b-xs w-xs btn-info single-price" data-value="52.95"></button>
+                <div class="bg-light lter b-b wrapper-md wrapper-p5" id="belowpicture">
+                  <span class="text-muted step-headline">Order now</span>
+                </div>
+
+                  <div class="panel-body wrapper-md">
+
+                  <div class="cart">
+                    <div class="row">
+                      <div class="col-lg-8 col-lg-offset-2">
+                          <h1 class="h3 text-black js-headline">Großes Kokos-Probierpaket - Vielfältige Produkte, vielseitige Verwendung – hier ist für alle etwas dabei!</h1>
+                          <p class="js-content">Bestellen Sie Ihre Kokos-Lieblinge in einem großen Paket mit Preisvorteil! Vielfältige Produkte, vielseitige Verwendung – hier ist für alle etwas dabei! Schnuppern Sie in unsere Bio-Kokos-Welt und sparen Sie im Vergleich zu Einzelkauf ordentlich ein! Das Paket besteht aus folgenden Produkten: 500 ml Bio-Kokosöl, 500 g Bio-Kokosmus, 400 ml Bio-Kokosmilch, 300 g Bio-Kokosraspel, 125 g Bio-Kokoschips, 280 g Bio-Kokosblütenzucker, 600 g Bio-Kokosmehl.
+                          Nur erntefrisch auf den Tisch. Die Dr. Goerg Bio-Kokosnussprodukte werden innerhalb von nur 72 Stunden nach der Ernte und größtenteils bei einer Temperatur 38 °C schonend hergestellt, somit wird die maximale Gehalt an Nährstoffen erhalten. Folgende Produkte sind aufgrund des Herstellungsverfahrens nicht in Rohkostqualität: Bio-Kkokosmilch, Bio-Kokosblütenzucker, Bio-Kokoschips.</p>
+                      <aside class="pricingtable m-t-md">
+                        <div class="row">
+                            <form class="form-inline" role="form">
+                              <div class="col-xs-8">
+                                <label class="col-md-12 control-label">Quantity</label>
+                              </div>
+                              <div class="col-xs-4">
+                                <div class="pull-right">
+                                  <input type="text" value="1" class="form-control amount">
+                                </div>
+                              </div>
+                            </form>
+                        </div>
+
+                        <div class="row">
+                          <div class="table-responsive col-xs-12 m-t-md m-b-md">
+                            <table class="table b-light">
+                              <tbody>
+                                <tr>
+                                  <td>Subtotal</td>
+                                  <td><span class="lbl-subtotal"></span></td>
+                                </tr>
+                                <tr>
+                                  <td>Shipping (Standard)</td>
+                                  <td><span class="lbl-shipping" data-value="4.9"></span></td>
+                                </tr>
+                                <tr class="total">
+                                  <td>Total</td>
+                                  <td><span class="lbl-total"></span></td>
+                                </tr>
+                                <tr class="small">
+                                  <td>incl. VAT</td>
+                                  <td><span class="lbl-vat"></span></td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+
+                        <div class="col-md-12 text-center">
+                          <a th:href="${paypal}"><img src="https://www.paypalobjects.com/de_DE/DE/i/btn/btn_buynowCC_LG.gif" alt="Jetzt einfach, schnell und sicher online bezahlen – mit PayPal." /></a>
+                        </div>
+                        <div class="col-md-12 text-center m-b-sm m-t-sm no-padder">
+                          <div class="options-or">
+                            <span>or</span>
+                          </div>
+                        </div>
+                        <div class="col-md-12 text-center">
+                          <button class="btn btn-info btn-addon btn-lg js-go-to-checkout"><i class="fa fa-shopping-cart"></i>Go to Checkout</button>
+                        </div>
+
+                      </aside>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- / cart-->
+
+                <div class="details" style="display:none">
+                  <form class="col-lg-8 col-lg-offset-2" id="details-form" role="form">
+                  <h3>Billing address</h3>
+                    <div class="form-group">
+                      <label class="control-label">Name</label>
+                      <div class="row">
+                        <div class="col-xs-6 pr5">
+                          <input type="text" class="form-control billing-firstname-val" placeholder="First name" required>
+                        </div>
+                        <div class="col-xs-6 pl5">
+                          <input type="text" class="form-control billing-lastname-val" placeholder="Last name" required>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label">Street / No.</label>
+                      <div class="row">
+                        <div class="col-xs-9 pr5">
+                          <input type="text" class="form-control billing-street-val" placeholder="Street" required>
+                        </div>
+                        <div class="col-xs-3 pl5">
+                          <input type="text" class="form-control billing-no-val" placeholder="No." required>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label">Postal Code / City</label>
+                      <div class="row">
+                        <div class="col-xs-4 pr5">
+                          <input type="text" class="form-control billing-postal-val" placeholder="Postal Code" required>
+                        </div>
+                        <div class="col-xs-8 pl5">
+                          <input type="text" class="form-control billing-city-val" placeholder="City" required>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label">Country</label>
+                      <div class="row">
+                        <div class="col-xs-12">
+                          <select name="country" class="form-control m-b billing-country-val">
+                            <option>Germany</option>
+                            <option>Austria</option>
+                            <option>Switzerland</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <h3>Shipping Address</h3>
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-xs-12">
+                          <div class="checkbox">
+                            <label class="i-checks">
+                              <input type="checkbox" class="address-identical" checked><i></i> Same as billing address
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="shipping-address" style="display:none;">
+                      <div class="form-group">
+                        <label class="control-label">Name</label>
+                        <div class="row">
+                          <div class="col-xs-6 pr5">
+                            <input type="text" class="form-control shipping-firstname-val" placeholder="First name">
+                          </div>
+                          <div class="col-xs-6 pl5">
+                            <input type="text" class="form-control shipping-lastname-val" placeholder="Last name">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label">Street / No.</label>
+                        <div class="row">
+                          <div class="col-xs-9 pr5">
+                            <input type="text" class="form-control shipping-street-val" placeholder="Street">
+                          </div>
+                          <div class="col-xs-3 pl5">
+                            <input type="text" class="form-control shipping-no-val" placeholder="No.">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label">Postal Code / City</label>
+                        <div class="row">
+                          <div class="col-xs-4 pr5">
+                            <input type="text" class="form-control shipping-postal-val" placeholder="Postal Code">
+                          </div>
+                          <div class="col-xs-8 pl5">
+                            <input type="text" class="form-control shipping-city-val" placeholder="City">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label">Country</label>
+                        <div class="row">
+                          <div class="col-xs-12">
+                            <select name="country" class="form-control m-b shipping-country-val">
+                              <option>Germany</option>
+                              <option>Austria</option>
+                              <option>Switzerland</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <h3>Shipping Option</h3>
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-xs-12">
+                          <select name="country" class="form-control m-b shipping-option-val">
+                            <option>Standard 3-5 workdays (x,xx €)</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <h3>Payment option</h3>
+                    <!-- PayPal Logo --><table border="0" cellpadding="10" cellspacing="0" align="left" class="paypal-info"><tr><td align="center"></td></tr><tr><td align="center"><a href="https://www.paypal.com/uk/webapps/mpp/paypal-popup" title="How PayPal Works" onclick="javascript:window.open('https://www.paypal.com/uk/webapps/mpp/paypal-popup','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;"><img src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png" border="0" alt="PayPal Logo"></a></td></tr></table><!-- PayPal Logo -->
+
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <p>Further payment options coming soon...</p>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-lg-12">
+                          <button type="submit" class="btn btn-info btn-addon btn-lg pull-right js-go-to-review">Continue</button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+
+                </div>
+                <!-- /details -->
+
+
+
+                <div class="review" style="display:none">
+                  <div class="col-lg-8 col-lg-offset-2">
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <h3>Billing address</h3>
+                      <div class="review-billling-name"></div>
+                      <div class="review-billing-address"></div>
+                    </div>
+                    <div class="col-xs-12 shipping-address" style="display:none">
+                      <h3>Shipping address</h3>
+                      <div class="review-shipping-name"></div>
+                      <div class="review-shipping-address"></div>
+                    </div>
+                  </div>
+                  <h3>Shipping option</h3>
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <div class="review-shipping-option"></div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <div class="text-center agreement" id="agreement" role="tablist" aria-multiselectable="true">
+                        <p>By placing the order I agree to Dr. Goergs
+                          <a role="button" data-toggle="collapse" href="#accordion-terms" aria-expanded="false" data-parent="#agreement"  aria-controls="accordion-terms">Terms and Conditions</a>.
+                        I have acknowledged the
+                          <a role="button" data-toggle="collapse" href="#accordion-withdrawal" aria-expanded="false" data-parent="#agreement" aria-controls="accordion-withdrawal">return conditions</a>.
+                        </p>
+
+                        <div class="panel">
+                          <div class="collapse topline" id="accordion-terms" role="tabpanel">
+                          <h4>Terms and Conditions</h4>
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla placerat libero nec arcu ultricies, eget tempus ligula pellentesque. In hac habitasse platea dictumst. Cras dolor mauris, blandit id accumsan ut, congue sed sem. Curabitur eu tellus sodales, fermentum quam a, hendrerit magna. Suspendisse urna erat, tristique at sapien lacinia, ornare fringilla orci. Duis at feugiat turpis, eu dapibus purus. Nulla ornare nisi eu pellentesque vestibulum. Nam vulputate magna vel luctus mollis. Nulla vitae elit et est lobortis laoreet in non nisl.</div>
+                        </div>
+
+                        <div class="panel">
+                          <div class="collapse topline" id="accordion-withdrawal" role="tabpanel">
+                          <h4>Return Conditions</h4>
+                          Aliquam erat volutpat. In quis metus vel risus hendrerit scelerisque quis a ipsum. Maecenas venenatis turpis vitae sapien auctor rhoncus. Duis et ante neque. Cras nunc sem, sollicitudin ac tellus placerat, tempor dignissim neque. Cras magna massa, porta sed ligula ut, consequat ultricies neque. Phasellus eget efficitur nunc. Fusce venenatis a est sit amet euismod. Cras bibendum augue eget nisi fringilla sodales.</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="panel b-a summary">
+                    <h3 class="h3 js-headline">Großes Kokos-Probierpaket - Vielfältige Produkte, vielseitige Verwendung – hier ist für alle etwas dabei!</h3>
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <img src="img/image_PP_GROss_1.jpg" class="mini-img">
+                        <p class="js-content">Bestellen Sie Ihre Kokos-Lieblinge in einem großen Paket mit Preisvorteil! Vielfältige Produkte, vielseitige Verwendung – hier ist für alle etwas dabei! Schnuppern Sie in unsere Bio-Kokos-Welt und sparen Sie im Vergleich zu Einzelkauf ordentlich ein! Das Paket besteht aus folgenden Produkten: 500 ml Bio-Kokosöl, 500 g Bio-Kokosmus, 400 ml Bio-Kokosmilch, 300 g Bio-Kokosraspel, 125 g Bio-Kokoschips, 280 g Bio-Kokosblütenzucker, 600 g Bio-Kokosmehl.
+                            Nur erntefrisch auf den Tisch. Die Dr. Goerg Bio-Kokosnussprodukte werden innerhalb von nur 72 Stunden nach der Ernte und größtenteils bei einer Temperatur 38 °C schonend hergestellt, somit wird die maximale Gehalt an Nährstoffen erhalten. Folgende Produkte sind aufgrund des Herstellungsverfahrens nicht in Rohkostqualität: Bio-Kkokosmilch, Bio-Kokosblütenzucker, Bio-Kokoschips.</p>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="table-responsive col-xs-12 m-t-md m-b-md">
+                        <table class="table b-light">
+                          <tbody>
+                            <tr>
+                              <td>Quantity</td>
+                              <td><span class="lbl-quantity"></span></td>
+                            </tr>
+                            <tr>
+                              <td>Price per item</td>
+                              <td><span class="lbl-priceperitem"></span></td>
+                            </tr>
+                            <tr>
+                              <td>Subtotal</td>
+                              <td><span class="lbl-subtotal"></span></td>
+                            </tr>
+                            <tr>
+                              <td>Shipping (Standard)</td>
+                              <td><span class="lbl-shipping" data-value="4.9"></span></td>
+                            </tr>
+                            <tr class="total">
+                              <td>Total</td>
+                              <td><span class="lbl-total"></span></td>
+                            </tr>
+                            <tr class="small">
+                              <td>incl. VAT</td>
+                              <td><span class="lbl-vat"></span></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+
+
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-lg-12">
+                          <button class="btn btn-info btn-addon btn-lg center-block js-go-to-confirmation">Buy now</button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <p class="text-center">You will be redirected to PayPal to make your payment.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <!-- /review order -->
+
+
+
+                <div class="confirmation" style="display:none">
+                  <div class="col-lg-8 col-lg-offset-2">
+
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <div class="panel b-a text-center thankyou">
+                        <p><strong>Thank you for your order #123456! A confirmation of your order will be sent to your@email.com</strong></p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <h3>Billing address</h3>
+                      <div class="review-billling-name"></div>
+                      <div class="review-billing-address"></div>
+                    </div>
+                    <div class="col-xs-12 shipping-address" style="display:none">
+                      <h3>Shipping address</h3>
+                      <div class="review-shipping-name"></div>
+                      <div class="review-shipping-address"></div>
+                    </div>
+                  </div>
+                  <h3>Shipping option</h3>
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <div class="review-shipping-option"></div>
+                    </div>
+                  </div>
+
+                  <div class="panel b-a summary m-t-xl">
+                    <h3 class="h3 js-headline">Großes Kokos-Probierpaket - Vielfältige Produkte, vielseitige Verwendung – hier ist für alle etwas dabei!</h3>
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <img src="img/image_PP_GROss_1.jpg" class="mini-img">
+                        <p class="js-content">Bestellen Sie Ihre Kokos-Lieblinge in einem großen Paket mit Preisvorteil! Vielfältige Produkte, vielseitige Verwendung – hier ist für alle etwas dabei! Schnuppern Sie in unsere Bio-Kokos-Welt und sparen Sie im Vergleich zu Einzelkauf ordentlich ein! Das Paket besteht aus folgenden Produkten: 500 ml Bio-Kokosöl, 500 g Bio-Kokosmus, 400 ml Bio-Kokosmilch, 300 g Bio-Kokosraspel, 125 g Bio-Kokoschips, 280 g Bio-Kokosblütenzucker, 600 g Bio-Kokosmehl.
+                            Nur erntefrisch auf den Tisch. Die Dr. Goerg Bio-Kokosnussprodukte werden innerhalb von nur 72 Stunden nach der Ernte und größtenteils bei einer Temperatur 38 °C schonend hergestellt, somit wird die maximale Gehalt an Nährstoffen erhalten. Folgende Produkte sind aufgrund des Herstellungsverfahrens nicht in Rohkostqualität: Bio-Kkokosmilch, Bio-Kokosblütenzucker, Bio-Kokoschips.</p>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="table-responsive col-xs-12 m-t-md m-b-md">
+                        <table class="table b-light">
+                          <tbody>
+                            <tr>
+                              <td>Quantity</td>
+                              <td><span class="lbl-quantity"></span></td>
+                            </tr>
+                            <tr>
+                              <td>Price per item</td>
+                              <td><span class="lbl-priceperitem"></span></td>
+                            </tr>
+                            <tr>
+                              <td>Subtotal</td>
+                              <td><span class="lbl-subtotal"></span></td>
+                            </tr>
+                            <tr>
+                              <td>Shipping (Standard)</td>
+                              <td><span class="lbl-shipping" data-value="4.9"></span></td>
+                            </tr>
+                            <tr class="total">
+                              <td>Total</td>
+                              <td><span class="lbl-total"></span></td>
+                            </tr>
+                            <tr class="small">
+                              <td>incl. VAT</td>
+                              <td><span class="lbl-vat"></span></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+                <!-- /confirmation -->
+
+                </div>
+                <!-- / panel body -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <!-- / main -->
+  </div>
+  <!-- / content -->
+
+  <!-- footer -->
+  <footer id="footer" class="app-footer m-l-none" role="footer">
+    <div class="wrapper-lg b-t bg-light text-center clearfix">
+      <p>&copy; Dr. Goerg - Premium Coconut Products<br/>
+      <a href="http://www.drgoerg.com/">www.drgoerg.com</a></p>
+
+      <div id="footer-nav" role="tablist" aria-multiselectable="true">
+        <ul class="navbar-nav nav">
+          <li><a role="button" data-toggle="collapse" href="#accordion-footer-imprint" aria-expanded="false" data-parent="#footer-nav"  aria-controls="accordion-footer-imprint">Imprint</a></li>
+          <li><a role="button" data-toggle="collapse" href="#accordion-footer-terms" aria-expanded="false" data-parent="#footer-nav"  aria-controls="accordion-footer-terms">Terms &amp; Conditions</a></li>
+          <li><a role="button" data-toggle="collapse" href="#accordion-footer-privacy" aria-expanded="false" data-parent="#footer-nav"  aria-controls="accordion-footer-privacy">Privacy Policy</a></li>
+          <li><a role="button" data-toggle="collapse" href="#accordion-footer-return" aria-expanded="false" data-parent="#footer-nav"  aria-controls="accordion-footer-return">Return Policy</a></li>
+        </ul>
+
+        <div class="panel m-b-none">
+          <div class="collapse" id="accordion-footer-imprint" role="tabpanel">
+          <h4>Imprint</h4>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla placerat libero nec arcu ultricies, eget tempus ligula pellentesque. In hac habitasse platea dictumst. Cras dolor mauris, blandit id accumsan ut, congue sed sem. Curabitur eu tellus sodales, fermentum quam a, hendrerit magna. Suspendisse urna erat, tristique at sapien lacinia, ornare fringilla orci. Duis at feugiat turpis, eu dapibus purus. Nulla ornare nisi eu pellentesque vestibulum. Nam vulputate magna vel luctus mollis. Nulla vitae elit et est lobortis laoreet in non nisl.</div>
+        </div>
+
+        <div class="panel m-b-none">
+          <div class="collapse" id="accordion-footer-terms" role="tabpanel">
+          <h4>Terms and Conditions</h4>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla placerat libero nec arcu ultricies, eget tempus ligula pellentesque. In hac habitasse platea dictumst. Cras dolor mauris, blandit id accumsan ut, congue sed sem. Curabitur eu tellus sodales, fermentum quam a, hendrerit magna. Suspendisse urna erat, tristique at sapien lacinia, ornare fringilla orci. Duis at feugiat turpis, eu dapibus purus. Nulla ornare nisi eu pellentesque vestibulum. Nam vulputate magna vel luctus mollis. Nulla vitae elit et est lobortis laoreet in non nisl.</div>
+        </div>
+
+        <div class="panel m-b-none">
+          <div class="collapse" id="accordion-footer-privacy" role="tabpanel">
+          <h4>Privacy Policy</h4>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla placerat libero nec arcu ultricies, eget tempus ligula pellentesque. In hac habitasse platea dictumst. Cras dolor mauris, blandit id accumsan ut, congue sed sem. Curabitur eu tellus sodales, fermentum quam a, hendrerit magna. Suspendisse urna erat, tristique at sapien lacinia, ornare fringilla orci. Duis at feugiat turpis, eu dapibus purus. Nulla ornare nisi eu pellentesque vestibulum. Nam vulputate magna vel luctus mollis. Nulla vitae elit et est lobortis laoreet in non nisl.</div>
+        </div>
+
+        <div class="panel m-b-none">
+          <div class="collapse" id="accordion-footer-return" role="tabpanel">
+          <h4>Return Policy</h4>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla placerat libero nec arcu ultricies, eget tempus ligula pellentesque. In hac habitasse platea dictumst. Cras dolor mauris, blandit id accumsan ut, congue sed sem. Curabitur eu tellus sodales, fermentum quam a, hendrerit magna. Suspendisse urna erat, tristique at sapien lacinia, ornare fringilla orci. Duis at feugiat turpis, eu dapibus purus. Nulla ornare nisi eu pellentesque vestibulum. Nam vulputate magna vel luctus mollis. Nulla vitae elit et est lobortis laoreet in non nisl.</div>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper b-t bg-dark text-center">
+    	Powered by <a href="#">MightyMerce</a>.
+    </div>
+  </footer>
+  <!-- / footer -->
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
+<script src="libs/jquery/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+<script src="libs/jsnumberformatter/jsnumberformatter.js"></script>
+<script src="libs/jsnumberformatter/jsnumberformatter.locale.js"></script>
+<script src="libs/jsnumberformatter/jsnumberformatter.locale.decimal.superset.js"></script>
+<script src="libs/jquery.shorten.js"></script>
+<script src="libs/validator.min.js"></script>
+<script src="js/script.js"></script>
+
+</body>
+</html>

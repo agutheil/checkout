@@ -1,0 +1,266 @@
+@import "../../libs/assets/font-awesome/css/_font-awesome";
+@import "../../libs/assets/simple-line-icons/css/_simple-line-icons";
+@import "../../libs/jquery/bootstrap/dist/css/_bootstrap";
+@import "_app";
+@import "_font";
+
+
+/*
+* GENERAL
+*/
+
+
+.app-content-body {
+  padding-bottom: 0;
+  background-color: #F6F6F6;
+}
+
+.panel-heading img {
+  height: 60px;
+  max-height: none;
+}
+
+.bg-light {
+  background-color: #fff;
+}
+
+.bg-dark {
+  background-color: #444444;
+}
+
+.topline {
+  border-top: 1px dashed #ddd;
+  padding-top: 25px;
+}
+
+.step-headline {
+  font-size: 24px;
+}
+
+.wrapper-p5
+{
+  padding: 5px 15px;
+}
+
+.teaser-img {
+  margin: 0 auto;
+  display: block;
+  position: relative;
+  max-height: 180px;
+
+  @media (max-width: 480px)
+  {
+    max-height: 130px;
+  }
+}
+
+.amount {
+  width: 60px !important;
+  text-align: center
+}
+
+.btn.single-price {
+  position: absolute;
+  top: 50px;
+  font-size: 2em;
+  right: 15px;
+  font-weight: 700;
+  width: auto;
+  border-radius: 0;
+  cursor: default;
+
+  @media (max-width: 480px)
+  {
+    font-size: 1.5em
+  }
+}
+
+a, a:active, a:hover, a:focus {
+  color: #0CB7E1;
+}
+
+.pr5 {
+ padding-right: 4px;
+}
+
+.pl5 {
+ padding-left: 4px;
+}
+
+.h3 {
+  font-size: 20px;
+  padding-bottom: 10px;
+}
+
+
+
+
+/*
+* Pricing table
+*/
+
+.pricingtable {
+
+  .control-label {
+    font-weight: bold;
+    font-size: 1.25em;
+    line-height: 35px;
+    text-align: right;
+  }
+
+  .bootstrap-touchspin {
+    width: 120px;
+
+    input {
+      text-align: center;
+    }
+  }
+
+  label {
+    padding-left: 0;
+  }
+
+  .options-or {
+    position: relative;
+    z-index: 1;
+
+    &::before {
+        border-top: 1px dashed #ddd;
+        content:"";
+        margin: 0 auto;
+        position: absolute;
+        top: 50%; left: 0; right: 0; bottom: 0;
+        width: 95%;
+        z-index: -1;
+    }
+
+    span {
+        background: #fff;
+        padding: 0 15px;
+        font-weight: bold;
+    }
+  }
+}
+
+
+.table-responsive {
+  border: none;
+
+  .table {
+    & > tbody > tr > td, .table > tbody > tr > th {
+      padding: 4px 0;
+      border: 0;
+    }
+
+    & > tbody > tr > td:nth-child(2) {
+      text-align: right;
+    }
+
+    & > tbody > tr.total > td {
+      border-top: 1px solid #ddd;
+      font-weight: bold;
+      font-size: 1.25em;
+    }
+
+    & > tbody > tr.small > td {
+      font-size: 80%;
+      padding: 0;
+    }
+  }
+}
+
+
+
+/*
+* BILLING DETAILS
+*/
+
+.paypal-info {
+  margin: 15px 0;
+}
+
+.summary {
+  background-color: #f6f6f6;
+  padding: 10px;
+}
+
+.mini-img {
+  float: left;
+  width: 70px;
+  margin: 0 10px 10px 0;
+  border: 1px solid #D3D3D3;
+}
+
+.agreement, .thankyou {
+  padding: 10px;
+  margin-top: 15px;
+
+  .panel {
+    background: none;
+    border: none;
+    box-shadow: none;
+  }
+}
+
+.thankyou {
+  background-color: #f6f6f6;
+}
+
+/*
+* FOOTER
+*/
+
+.app-footer {
+  position: static;
+
+  .bg-dark a {
+    color: #ddd;
+  }
+
+  a {
+    color: #0CB7E1;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0 auto;
+    float: none;
+    display: inline-block;
+
+    li {
+      float: left;
+      padding: 5px 10px;
+    }
+  }
+
+  .nav > li > a:hover, .app-footer .nav > li > a:focus {
+    background: none;
+  }
+
+  .navbar-nav>li>a {
+    padding: 0;
+  }
+}
+
+#footer-nav {
+    .panel {
+    background: none;
+    border: none;
+    box-shadow: none;
+  }
+}
+
+
+@media (max-width: 767px) {
+  .app-footer ul li {
+    float: none;
+  }
+  ul.navbar-nav > li > a {
+    box-shadow: none;
+    padding: 2px 0;
+  }
+
+  .btn.single-price {
+    top: 15px;
+  }
+}
