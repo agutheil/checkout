@@ -16,7 +16,7 @@ public class MyConfig {
 
     @Bean
     public OAuth2Template oAuth2Template(){
-        OAuth2Template oAuth2Template = new OAuth2Template("mightymerceapp","mySecretOAuthSecret",coreUrl+"/oauth/authorize", coreUrl+"/oauth/authenticate", coreUrl+"/oauth/token");
+        OAuth2Template oAuth2Template = new OAuth2Template("coreapp","mySecretOAuthSecret",coreUrl+"/oauth/authorize", coreUrl+"/oauth/authenticate", coreUrl+"/oauth/token");
         oAuth2Template.setUseParametersForClientAuthentication(false);
         return oAuth2Template;
     }

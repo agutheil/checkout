@@ -30,10 +30,4 @@ public class MightyCore extends AbstractOAuth2ApiBinding {
         Article article = getRestTemplate().getForObject(coreUrl+"/api/articles/"+articleId, Article.class);
         return article;
     }
-
-    public void createOrder(Article article) {
-        Order order = new Order();
-        order.setTest(article.getArticleId());
-        getRestTemplate().postForObject(coreUrl+"/api/socialOrders/",order,Order.class);
-    }
 }
