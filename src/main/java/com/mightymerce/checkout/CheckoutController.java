@@ -44,23 +44,16 @@ public class CheckoutController {
 
     @RequestMapping(value = "checkout/{articleId}", method=RequestMethod.GET)
     public String checkout(@PathVariable String articleId, Model model) {
-        model.addAttribute("articleId", articleId);
+    	model.addAttribute("articleId", articleId);
         AccessGrant ag = oAuth2Template.exchangeCredentialsForAccess("admin", "admin",params);
         MightyCore mightyCore = new MightyCore(ag.getAccessToken(), TokenStrategy.AUTHORIZATION_HEADER, coreUrl);
         Article article = mightyCore.getArticle(articleId);
         model.addAttribute("articleName",article.getName());
-        model.addAttribute("paypal",article.getPaypal());
         model.addAttribute("price",article.getPrice());
         model.addAttribute("currency",article.getCurrency());
         model.addAttribute("description",article.getDescription());
-        model.addAttribute("tax",BigDecimal.valueOf(2));
         model.addAttribute("shippingAmt",BigDecimal.valueOf(5));
-        model.addAttribute("handlingAmt",BigDecimal.valueOf(1));
-        model.addAttribute("handlingDsc",BigDecimal.valueOf(-3));
-        model.addAttribute("insuranceAmt",BigDecimal.valueOf(2));
-        // 
         model.addAttribute("paypalUrl",paypalUrl);
-        
         return "checkout";
     }
 

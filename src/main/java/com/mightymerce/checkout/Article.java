@@ -9,7 +9,8 @@ import java.math.BigDecimal;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Article {
-    private String articleId;
+
+	private String articleId;
 
     private String name;
 
@@ -44,4 +45,28 @@ public class Article {
     public String getPaypal() {
         return paypal;
     }
+    
+    public void setArticleId(String articleId) {
+		this.articleId = articleId;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
+
+	public void setCurrency(String currency) {
+		this.currency = currency;
+	}
+
+	public void setPaypal(String paypal) {
+		this.paypal = paypal;
+	}
 }

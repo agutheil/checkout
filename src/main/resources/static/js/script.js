@@ -9,10 +9,25 @@ function parseCurrency(number) {
     return number;
 }
 
+function parseCurrencyForPP(number) {
+    var options = new JsNumberFormatter.locales.formatOptions('us')
+                    .specifyDecimalMask('00');
+    number = JsNumberFormatter.formatNumber(number, options, true);
+    return number;
+}
+
 function calculatePrices() {
 
-    var singlePrice = $('.single-price').data('value');
-
+    var singlePriceData = $('.single-price').data('value');
+    var singlePrice;
+    if (typeof singlePriceData == 'string') {
+    	singlePrice = parseFloat(singlePriceData)
+    } else {
+    	singlePrice = singlePriceData;
+    }
+    console.log(singlePrice)
+    console.log(typeof singlePrice)
+    
     var amount = $('.amount').val();
     var shipping = $('.lbl-shipping').data('value');
     var subtotal = amount * singlePrice;
@@ -25,7 +40,9 @@ function calculatePrices() {
     $('.lbl-quantity').text(amount);
     $('.lbl-shipping').text(parseCurrency(shipping) + ' €');
     $('.lbl-subtotal').text(parseCurrency(subtotal) + ' €');
+    $('#PAYMENTREQUEST_0_ITEMAMT').val(parseCurrencyForPP(subtotal));
     $('.lbl-total').text(parseCurrency(total) + ' €');
+    $('#PAYMENTREQUEST_0_AMT').val(parseCurrencyForPP(total));
     $('.lbl-vat').text(parseCurrency(vat) + ' €');
 }
 
