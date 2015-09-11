@@ -31,6 +31,9 @@ public class CheckoutController {
     
     @Value("${mightymerce.paypalUrl}")
     private String paypalUrl;
+    
+    @Value("${mightymerce.istestmode}")
+    private boolean isTestmode;
 
 
     private MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
@@ -42,12 +45,17 @@ public class CheckoutController {
 
     }
 
-    @RequestMapping(value = "checkout/{articleId}", method=RequestMethod.GET)
+    @RequestMapping(value = "details/{articleId}", method=RequestMethod.GET)
     public String checkout(@PathVariable String articleId, Model model) {
+<<<<<<< HEAD
     	model.addAttribute("articleId", articleId);
         AccessGrant ag = oAuth2Template.exchangeCredentialsForAccess("admin", "admin",params);
         MightyCore mightyCore = new MightyCore(ag.getAccessToken(), TokenStrategy.AUTHORIZATION_HEADER, coreUrl);
         Article article = mightyCore.getArticle(articleId);
+=======
+        model.addAttribute("articleId", articleId);
+        Article article = retrieveArticle(articleId);
+>>>>>>> adding pp
         model.addAttribute("articleName",article.getName());
         model.addAttribute("price",article.getPrice());
         model.addAttribute("currency",article.getCurrency());
@@ -56,6 +64,22 @@ public class CheckoutController {
         model.addAttribute("paypalUrl",paypalUrl);
         return "checkout";
     }
+
+	private Article retrieveArticle(String articleId) {
+		Article article;
+		if (!isTestmode){
+			AccessGrant ag = oAuth2Template.exchangeCredentialsForAccess("admin", "admin",params);
+	        MightyCore mightyCore = new MightyCore(ag.getAccessToken(), TokenStrategy.AUTHORIZATION_HEADER, coreUrl);
+	        article = mightyCore.getArticle(articleId);
+		} else {
+			article = new Article();
+			article.setName("Mein Name");
+			article.setPrice(new BigDecimal(11.55));
+			article.setCurrency("EUR");
+			article.setDescription("Meine Beschreibung");
+		}
+		return article;
+	}
 
     @RequestMapping(value = "success", method=RequestMethod.GET)
     public String success() {

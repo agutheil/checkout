@@ -40,6 +40,7 @@ targetCompatibility = 1.8
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
     // Start project specific dependencies
+    compile("org.apache.commons:commons-lang3:3.0.1")
     compile("org.springframework.boot:spring-boot-starter-social-facebook")
     compile group: 'org.springframework.security', name: 'spring-security-crypto', version: spring_security_version
     compile group:'org.apache.httpcomponents', name:'httpclient', version: '4.4'
