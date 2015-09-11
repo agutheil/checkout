@@ -40,15 +40,7 @@ public class Article {
         return currency;
     }
 
-<<<<<<< HEAD
-    public String getPaypal() {
-        return paypal;
-    }
-    
-    public void setArticleId(String articleId) {
-=======
 	public void setArticleId(String articleId) {
->>>>>>> adding pp
 		this.articleId = articleId;
 	}
 
@@ -67,11 +59,4 @@ public class Article {
 	public void setCurrency(String currency) {
 		this.currency = currency;
 	}
-
-<<<<<<< HEAD
-	public void setPaypal(String paypal) {
-		this.paypal = paypal;
-	}
-=======
->>>>>>> adding pp
 }
