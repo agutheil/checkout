@@ -1,0 +1,160 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Mighty Merce Checkout</title>
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+  <link rel="stylesheet" href="/css/style-min.css" type="text/css" />
+  
+</head>
+<body>
+<div class="app app-dock">
+
+  <!-- content -->
+  <div id="content" class="app-content m-l-none" role="main">
+    <div class="app-content-body ">
+
+      <!-- main -->
+      <div class="col">
+        <div class="wrapper-md">
+          <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+              <div class="panel b-a">
+                <div class="panel-heading">
+                  <a href="#/">
+                    <img src="/img/logo.gif" alt="." />
+                  </a>
+                </div>
+                <img src="/img/image_PP_GROss_1.jpg" class="teaser-img" />
+                <button class="btn m-b-xs w-xs btn-info single-price" th:attr="data-value=${PAYMENTINFO_0_AMT}" data-value="52.95"></button>
+
+                <div class="bg-light lter b-b wrapper-md wrapper-p5" id="belowpicture">
+                  <span class="text-muted step-headline">Summary</span>
+                </div>
+
+                  <div class="panel-body wrapper-md">
+
+                <div class="confirmation">
+                  <div class="col-lg-8 col-lg-offset-2">
+
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <div class="panel b-a text-center thankyou">
+                        <p><strong><span th:text="${FIRSTNAME}" /> <span th:text="${LASTNAME}" />, Thank you for your order #123456! A confirmation of your order will be sent to your@email.com</strong></p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <h3>Billing Details</h3>
+                      <div class="review-billling-name">
+			   			<p>Transaction ID: <span th:text="${PAYMENTINFO_0_TRANSACTIONID}" /> </p>
+			   			<p>Transaction Type: <span th:text="${PAYMENTINFO_0_TRANSACTIONTYPE}" /></p>
+			   			<p>Payment Total Amount: <span th:text="${PAYMENTINFO_0_AMT}" /></p>
+			   			<p>Currency Code: <span th:text="${PAYMENTINFO_0_CURRENCYCODE}" /></p>
+			   			<p>Payment Status: <span th:text="${PAYMENTINFO_0_PAYMENTSTATUS}" /></p>
+			   			<p>Payment Type: <span th:text="${PAYMENTINFO_0_PAYMENTTYPE}" /></p>
+                      </div>
+                      <div class="review-billing-address"></div>
+                    </div>
+                    <div class="col-xs-12 shipping-address" >
+                      <h3>Shipping address</h3>
+                      <br />
+                      <div class="review-shipping-name"><span th:text="${PAYMENTREQUEST_0_SHIPTONAME}" /></div>
+                      <div class="review-shipping-address">
+                      	<span th:text="${PAYMENTREQUEST_0_SHIPTOSTREET}" /><br />
+						<span th:text="${PAYMENTREQUEST_0_SHIPTOCITY}" /><br />
+						<span th:text="${PAYMENTREQUEST_0_SHIPTOSTATE}+'- '+${PAYMENTREQUEST_0_SHIPTOZIP}" /><br />
+					  </div>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+                <!-- /confirmation -->
+
+                </div>
+                <!-- / panel body -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <!-- / main -->
+  </div>
+  <!-- / content -->
+
+  <!-- footer -->
+  <footer id="footer" class="app-footer m-l-none" role="footer">
+    <div class="wrapper-lg b-t bg-light text-center clearfix">
+      <p>&copy; Dr. Goerg - Premium Coconut Products<br/>
+      <a href="http://www.drgoerg.com/">www.drgoerg.com</a></p>
+
+      <div id="footer-nav" role="tablist" aria-multiselectable="true">
+        <ul class="navbar-nav nav">
+          <li><a role="button" data-toggle="collapse" href="#accordion-footer-imprint" aria-expanded="false" data-parent="#footer-nav"  aria-controls="accordion-footer-imprint">Imprint</a></li>
+          <li><a role="button" data-toggle="collapse" href="#accordion-footer-terms" aria-expanded="false" data-parent="#footer-nav"  aria-controls="accordion-footer-terms">Terms &amp; Conditions</a></li>
+          <li><a role="button" data-toggle="collapse" href="#accordion-footer-privacy" aria-expanded="false" data-parent="#footer-nav"  aria-controls="accordion-footer-privacy">Privacy Policy</a></li>
+          <li><a role="button" data-toggle="collapse" href="#accordion-footer-return" aria-expanded="false" data-parent="#footer-nav"  aria-controls="accordion-footer-return">Return Policy</a></li>
+        </ul>
+
+        <div class="panel m-b-none">
+          <div class="collapse" id="accordion-footer-imprint" role="tabpanel">
+          <h4>Imprint</h4>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla placerat libero nec arcu ultricies, eget tempus ligula pellentesque. In hac habitasse platea dictumst. Cras dolor mauris, blandit id accumsan ut, congue sed sem. Curabitur eu tellus sodales, fermentum quam a, hendrerit magna. Suspendisse urna erat, tristique at sapien lacinia, ornare fringilla orci. Duis at feugiat turpis, eu dapibus purus. Nulla ornare nisi eu pellentesque vestibulum. Nam vulputate magna vel luctus mollis. Nulla vitae elit et est lobortis laoreet in non nisl.</div>
+        </div>
+
+        <div class="panel m-b-none">
+          <div class="collapse" id="accordion-footer-terms" role="tabpanel">
+          <h4>Terms and Conditions</h4>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla placerat libero nec arcu ultricies, eget tempus ligula pellentesque. In hac habitasse platea dictumst. Cras dolor mauris, blandit id accumsan ut, congue sed sem. Curabitur eu tellus sodales, fermentum quam a, hendrerit magna. Suspendisse urna erat, tristique at sapien lacinia, ornare fringilla orci. Duis at feugiat turpis, eu dapibus purus. Nulla ornare nisi eu pellentesque vestibulum. Nam vulputate magna vel luctus mollis. Nulla vitae elit et est lobortis laoreet in non nisl.</div>
+        </div>
+
+        <div class="panel m-b-none">
+          <div class="collapse" id="accordion-footer-privacy" role="tabpanel">
+          <h4>Privacy Policy</h4>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla placerat libero nec arcu ultricies, eget tempus ligula pellentesque. In hac habitasse platea dictumst. Cras dolor mauris, blandit id accumsan ut, congue sed sem. Curabitur eu tellus sodales, fermentum quam a, hendrerit magna. Suspendisse urna erat, tristique at sapien lacinia, ornare fringilla orci. Duis at feugiat turpis, eu dapibus purus. Nulla ornare nisi eu pellentesque vestibulum. Nam vulputate magna vel luctus mollis. Nulla vitae elit et est lobortis laoreet in non nisl.</div>
+        </div>
+
+        <div class="panel m-b-none">
+          <div class="collapse" id="accordion-footer-return" role="tabpanel">
+          <h4>Return Policy</h4>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla placerat libero nec arcu ultricies, eget tempus ligula pellentesque. In hac habitasse platea dictumst. Cras dolor mauris, blandit id accumsan ut, congue sed sem. Curabitur eu tellus sodales, fermentum quam a, hendrerit magna. Suspendisse urna erat, tristique at sapien lacinia, ornare fringilla orci. Duis at feugiat turpis, eu dapibus purus. Nulla ornare nisi eu pellentesque vestibulum. Nam vulputate magna vel luctus mollis. Nulla vitae elit et est lobortis laoreet in non nisl.</div>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper b-t bg-dark text-center">
+      Powered by <a href="#">MightyMerce</a>.
+    </div>
+  </footer>
+  <!-- / footer -->
+
+</div>
+<script type="text/javascript">
+window.paypalCheckoutReady = function () {
+paypal.checkout.setup('Your merchant email id', {
+container: 'myContainer', //{String|HTMLElement|Array} where you want the PayPal button to reside
+environment: 'sandbox' //or 'production' depending on your environment
+});
+};
+</script>
+<script src="//www.paypalobjects.com/api/checkout.js" async="async"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="/libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
+<script src="/libs/jquery/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+<script src="/libs/jsnumberformatter/jsnumberformatter.js"></script>
+<script src="/libs/jsnumberformatter/jsnumberformatter.locale.js"></script>
+<script src="/libs/jsnumberformatter/jsnumberformatter.locale.decimal.superset.js"></script>
+<script src="/libs/jquery.shorten.js"></script>
+<script src="/libs/validator.min.js"></script>
+<script src="/js/script.js"></script>
+
+</body>
+</html>

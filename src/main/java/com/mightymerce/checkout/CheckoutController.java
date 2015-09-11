@@ -67,7 +67,7 @@ public class CheckoutController {
 		} else {
 			article = new Article();
 			article.setName("Mein Name");
-			article.setPrice(new BigDecimal(11.55));
+			article.setPrice(BigDecimal.valueOf(11.55));
 			article.setCurrency("EUR");
 			article.setDescription("Meine Beschreibung");
 		}

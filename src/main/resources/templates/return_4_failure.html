@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>MightyMerce PayPal Checkout Return</title>
+      <!--Including Bootstrap style files-->
+      <link href="css/bootstrap.min.css" rel="stylesheet">
+      <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+      		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="https://code.jquery.com/jquery.js"></script>      
+  </head>
+  <body>
+      <div class="container-fluid">
+      <div class="well">
+      
+         <h2 class="text-center">MightyMerce PayPal Checkout</h2>
+      </div>
+      <div class="row-fluid">    
+
+<div class="hero-unit">
+    			<!-- Display the Transaction Details-->
+    			<h4> There is a Funding Failure in your account. You can modify your funding sources to fix it and make purchase later. </h4>
+    			Payment Status: <%=result.get("PAYMENTINFO_0_PAYMENTSTATUS")%>
+    			
+    			
+    			<h3> Click <a href='https://www.sandbox.paypal.com/'>here </a> to go to PayPal site.</h3> <!--Change to live PayPal site for production-->
+    			</div>
+			
+			</div> <!-- Row-Fluid ends here -->
+		</div>  <!--Container-Fluid ends here -->
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="js/bootstrap.min.js"></script>
+	</body>
+</html>

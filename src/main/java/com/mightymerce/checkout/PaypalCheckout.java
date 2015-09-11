@@ -5,7 +5,6 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,13 +28,11 @@ public class PaypalCheckout {
 	@Autowired
 	private HttpServletResponse response;
 	
-	@Autowired
-	private HttpSession session;
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public void doPost()
+	public String doPost()
 					throws ServletException, IOException {
-		
+		HttpSession session = request.getSession();
 		PayPal paypal = new PayPal();
 		/*
 '------------------------------------
@@ -59,32 +56,54 @@ public class PaypalCheckout {
 		checkoutDetails=setRequestParams(request);
 		//Redirect to check out page for check out mark
 		if(!isSet(request.getParameter("Confirm")) && isSet(request.getParameter("checkout"))){
-			doCheckout(checkoutDetails); //checkout.jsp
+			return doCheckout(checkoutDetails, session); //checkout.jsp
 		}
 		else{
 			Map<String, String> nvp=null;
 			if(isSet(session.getAttribute("EXPRESS_MARK")) && session.getAttribute("EXPRESS_MARK").equals("ECMark")){
-				nvp = handleMarkExpress(paypal, cancelURL, checkoutDetails);
+				checkoutDetails.putAll((Map<String, String>) session.getAttribute("checkoutDetails"));
+				checkoutDetails.putAll(setRequestParams(request));
+				if(isSet(checkoutDetails.get("shipping_method"))) {
+					BigDecimal new_shipping = new BigDecimal(checkoutDetails.get("shipping_method")); //need to change this value, just for testing
+					BigDecimal shippingamt = new BigDecimal(checkoutDetails.get("PAYMENTREQUEST_0_SHIPPINGAMT"));
+					BigDecimal paymentAmount = new BigDecimal(checkoutDetails.get("PAYMENTREQUEST_0_AMT"));
+					if(shippingamt.compareTo(new BigDecimal(0)) > 0){ 
+						paymentAmount = paymentAmount.add(new_shipping).subtract(shippingamt) ;
+					}
+					//session.setAttribute("PAYMENTREQUEST_0_AMT",paymentAmount.toString());  //.replace(".00", "")
+					//session.setAttribute("PAYMENTREQUEST_0_SHIPPINGAMT",new_shipping.toString());	
+					//session.setAttribute("shippingAmt",new_shipping.toString());
+					String val = checkoutDetails.put("PAYMENTREQUEST_0_AMT",paymentAmount.toString());  //.replace(".00", "")
+
+					checkoutDetails.put("PAYMENTREQUEST_0_SHIPPINGAMT",new_shipping.toString());	
+					checkoutDetails.put("shippingAmt",new_shipping.toString());
+				}
+				//TODO jsp umwandeln
+				returnURL = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/lightboxreturn.jsp";
+				nvp = paypal.callMarkExpressCheckout(checkoutDetails, returnURL, cancelURL);  
+				session.setAttribute("checkoutDetails", checkoutDetails);
 			} else {
-				nvp = handleShortcutExpress(paypal, returnURL, cancelURL,
-						checkoutDetails);
+				session.invalidate();
+				session = request.getSession();
+				nvp = paypal.callShortcutExpressCheckout (checkoutDetails, returnURL, cancelURL);
+				session.setAttribute("checkoutDetails", checkoutDetails);
 			}
 
 			String strAck = nvp.get("ACK").toString().toUpperCase();
 			if(strAck !=null && (strAck.equals("SUCCESS") || strAck.equals("SUCCESSWITHWARNING") ))
 			{
-				handleSuccess(paypal, nvp); //redirect via headers
+				handleSuccess(paypal, nvp, session); //redirect via headers
 			}
 			else
 			{
-				handleError(nvp); //error.jsp
-
+				return handleError(nvp, session); //error.jsp
 			}
 		}
+		return "error"; //never reached
 	}
 
 
-	private void handleError(Map<String, String> nvp) throws ServletException,
+	private String handleError(Map<String, String> nvp, HttpSession session) throws ServletException,
 			IOException {
 		// Display a user friendly Error on the page using any of the following error information returned by PayPal
 		String ErrorCode = nvp.get("L_ERRORCODE0").toString();
@@ -98,62 +117,17 @@ public class PaypalCheckout {
 				"<br>Error Code: " + ErrorCode +
 				"<br>Error Severity Code: " + ErrorSeverityCode;
 		request.setAttribute("error", errorString);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("error.jsp");
-		session.invalidate();
-		if (dispatcher != null){
-			dispatcher.forward(request, response);
-		}
+		return "error";
 	}
 
 
-	private void handleSuccess(PayPal paypal, Map<String, String> nvp) {
+	private void handleSuccess(PayPal paypal, Map<String, String> nvp, HttpSession session) {
 		session.setAttribute("TOKEN", nvp.get("TOKEN").toString());
 		//Redirect to paypal.com
 		paypal.redirectURL(response, nvp.get("TOKEN").toString(),(isSet(session.getAttribute("EXPRESS_MARK")) && session.getAttribute("EXPRESS_MARK").equals("ECMark") || (paypal.getUserActionFlag().equalsIgnoreCase("true"))) );
 	}
 
-
-	private Map<String, String> handleShortcutExpress(PayPal paypal,
-			String returnURL, String cancelURL,
-			Map<String, String> checkoutDetails) {
-		Map<String, String> nvp;
-		session.invalidate();
-		session = request.getSession();
-		nvp = paypal.callShortcutExpressCheckout (checkoutDetails, returnURL, cancelURL);
-		session.setAttribute("checkoutDetails", checkoutDetails);
-		return nvp;
-	}
-
-
-	private Map<String, String> handleMarkExpress(PayPal paypal,
-			String cancelURL, Map<String, String> checkoutDetails) {
-		String returnURL;
-		Map<String, String> nvp;
-		checkoutDetails.putAll((Map<String, String>) session.getAttribute("checkoutDetails"));
-		checkoutDetails.putAll(setRequestParams(request));
-		if(isSet(checkoutDetails.get("shipping_method"))) {
-			BigDecimal new_shipping = new BigDecimal(checkoutDetails.get("shipping_method")); //need to change this value, just for testing
-			BigDecimal shippingamt = new BigDecimal(checkoutDetails.get("PAYMENTREQUEST_0_SHIPPINGAMT"));
-			BigDecimal paymentAmount = new BigDecimal(checkoutDetails.get("PAYMENTREQUEST_0_AMT"));
-			if(shippingamt.compareTo(new BigDecimal(0)) > 0){ 
-				paymentAmount = paymentAmount.add(new_shipping).subtract(shippingamt) ;
-			}
-			//session.setAttribute("PAYMENTREQUEST_0_AMT",paymentAmount.toString());  //.replace(".00", "")
-			//session.setAttribute("PAYMENTREQUEST_0_SHIPPINGAMT",new_shipping.toString());	
-			//session.setAttribute("shippingAmt",new_shipping.toString());
-			String val = checkoutDetails.put("PAYMENTREQUEST_0_AMT",paymentAmount.toString());  //.replace(".00", "")
-
-			checkoutDetails.put("PAYMENTREQUEST_0_SHIPPINGAMT",new_shipping.toString());	
-			checkoutDetails.put("shippingAmt",new_shipping.toString());
-		}
-		returnURL = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/lightboxreturn.jsp";
-		nvp = paypal.callMarkExpressCheckout(checkoutDetails, returnURL, cancelURL);  
-		session.setAttribute("checkoutDetails", checkoutDetails);
-		return nvp;
-	}
-
-
-	private void doCheckout(Map<String, String> checkoutDetails)
+	private String doCheckout(Map<String, String> checkoutDetails,HttpSession session)
 			throws ServletException, IOException {
 		session.setAttribute("checkoutDetails", checkoutDetails);
 
@@ -166,10 +140,7 @@ public class PaypalCheckout {
 
 		request.setAttribute("PAYMENTREQUEST_0_AMT", StringEscapeUtils.escapeHtml4(request.getParameter("PAYMENTREQUEST_0_AMT")));
 		//redirect to check out page
-		RequestDispatcher dispatcher = request.getRequestDispatcher("checkout.jsp");
-		if (dispatcher != null){
-			dispatcher.forward(request, response);
-		}
+		return "checkout";
 	}
 
 
