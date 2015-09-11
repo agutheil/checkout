@@ -70,8 +70,8 @@
                       <div class="review-shipping-name"><span th:text="${PAYMENTREQUEST_0_SHIPTONAME}" /></div>
                       <div class="review-shipping-address">
                       	<span th:text="${PAYMENTREQUEST_0_SHIPTOSTREET}" /><br />
-						<span th:text="${PAYMENTREQUEST_0_SHIPTOCITY}" /><br />
-						<span th:text="${PAYMENTREQUEST_0_SHIPTOSTATE}+'- '+${PAYMENTREQUEST_0_SHIPTOZIP}" /><br />
+						<span th:text="${PAYMENTREQUEST_0_SHIPTOZIP} + ' - ' +${PAYMENTREQUEST_0_SHIPTOCITY}" /><br />
+						<span th:text="${PAYMENTREQUEST_0_SHIPTOSTATE}" /><br />
 					  </div>
                     </div>
                   </div>
