@@ -82,7 +82,7 @@
                           </div>
                         </div>
 
-						<form class="form-inline" role="form" th:action="${paypalUrl}" method="POST">  
+						<form class="form-inline" role="form" action="/Checkout" method="POST">  
                         <input type="hidden" name="L_PAYMENTREQUEST_0_NAME0" th:value="${articleName}"></input>
                         <input type="hidden" name="L_PAYMENTREQUEST_0_NUMBER0" th:value="${articleId}"></input>
                         <input type="hidden" id="PAYMENTREQUEST_0_ITEMAMT" name="PAYMENTREQUEST_0_ITEMAMT" th:value="${price}" />

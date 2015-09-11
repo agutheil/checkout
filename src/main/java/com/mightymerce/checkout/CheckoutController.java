@@ -29,9 +29,6 @@ public class CheckoutController {
     @Value("${mightymerce.coreUrl}")
     private String coreUrl;
     
-    @Value("${mightymerce.paypalUrl}")
-    private String paypalUrl;
-    
     @Value("${mightymerce.istestmode}")
     private boolean isTestmode;
 
@@ -54,7 +51,6 @@ public class CheckoutController {
         model.addAttribute("currency",article.getCurrency());
         model.addAttribute("description",article.getDescription());
         model.addAttribute("shippingAmt",BigDecimal.valueOf(5));
-        model.addAttribute("paypalUrl",paypalUrl);
         return "checkout";
     }
 
