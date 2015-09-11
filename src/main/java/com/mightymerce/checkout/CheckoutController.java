@@ -47,15 +47,8 @@ public class CheckoutController {
 
     @RequestMapping(value = "details/{articleId}", method=RequestMethod.GET)
     public String checkout(@PathVariable String articleId, Model model) {
-<<<<<<< HEAD
-    	model.addAttribute("articleId", articleId);
-        AccessGrant ag = oAuth2Template.exchangeCredentialsForAccess("admin", "admin",params);
-        MightyCore mightyCore = new MightyCore(ag.getAccessToken(), TokenStrategy.AUTHORIZATION_HEADER, coreUrl);
-        Article article = mightyCore.getArticle(articleId);
-=======
         model.addAttribute("articleId", articleId);
         Article article = retrieveArticle(articleId);
->>>>>>> adding pp
         model.addAttribute("articleName",article.getName());
         model.addAttribute("price",article.getPrice());
         model.addAttribute("currency",article.getCurrency());
