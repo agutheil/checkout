@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -28,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/Return")
 public class PaypalReturn {
 	@Autowired
-	private HttpServletRequest request;
+	private HttpServletRequest request;	
 	
 	@Autowired
 	private HttpServletResponse response;
@@ -40,15 +41,16 @@ public class PaypalReturn {
     @Value("${mightymerce.istestmode}")
     private boolean isTestmode;
 	@Value("${mightymerce.user}")
-	private String mightyUser = System.getenv("mightymerce.user");
+	private String mightyUser;
 	@Value("${mightymerce.pw}")
-	private String mightyPw = System.getenv("mightymerce.pw");
+	private String mightyPw;
     
-    public PaypalReturn() {
-        super();
-        oAuth2Template = new OAuth2Template("coreapp","mySecretOAuthSecret",coreUrl+"/oauth/authorize", coreUrl+"/oauth/authenticate", coreUrl+"/oauth/token");
-        oAuth2Template.setUseParametersForClientAuthentication(false);
+	
+    @Inject
+    public PaypalReturn(OAuth2Template oAuth2Template) {
+        this.oAuth2Template = oAuth2Template;
         params.set("scope", "read write");
+
     }
 
     @RequestMapping(method = RequestMethod.GET)
