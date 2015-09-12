@@ -42,7 +42,7 @@ public class CheckoutController {
 
     }
 
-    @RequestMapping(value = "details/{articleId}", method=RequestMethod.GET)
+    @RequestMapping(value = "checkout/{articleId}", method=RequestMethod.GET)
     public String checkout(@PathVariable String articleId, Model model) {
         model.addAttribute("articleId", articleId);
         Article article = retrieveArticle(articleId);
