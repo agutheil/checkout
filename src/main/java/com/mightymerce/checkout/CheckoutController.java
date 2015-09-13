@@ -48,9 +48,10 @@ public class CheckoutController {
         Article article = retrieveArticle(articleId);
         model.addAttribute("articleName",article.getName());
         model.addAttribute("price",article.getPrice());
+        model.addAttribute("deliveryCosts",article.getDeliveryCosts());
         model.addAttribute("currency",article.getCurrency());
         model.addAttribute("description",article.getDescription());
-        model.addAttribute("shippingAmt",BigDecimal.valueOf(5));
+        model.addAttribute("shippingAmt",article.getDeliveryCosts());
         return "checkout";
     }
 
@@ -64,6 +65,7 @@ public class CheckoutController {
 			article = new Article();
 			article.setName("Mein Name");
 			article.setPrice(BigDecimal.valueOf(11.55));
+			article.setDeliveryCosts(BigDecimal.valueOf(3.95));
 			article.setCurrency("EUR");
 			article.setDescription("Meine Beschreibung");
 		}
