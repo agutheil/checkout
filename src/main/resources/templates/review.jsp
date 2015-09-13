@@ -2,7 +2,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
-<%@ include file="header.jsp" %> 
 
 <div class="span4">
 	</div>
@@ -60,4 +59,3 @@
 				});
 				</script>
 			
-<%@ include file="footer.jsp" %> 

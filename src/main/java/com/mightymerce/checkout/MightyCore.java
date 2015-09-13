@@ -35,13 +35,7 @@ public class MightyCore extends AbstractOAuth2ApiBinding {
         return article;
     }
     
-    public void createOrder(Long articleId, String payerId, String txId, String paymentStatus, BigDecimal amount) {
-        Order order = new Order();
-        order.setArticle(articleId);
-        order.setPayerId(payerId);
-        order.setTransactionId(txId);
-        order.setPaymentStatus(paymentStatus.toLowerCase());
-        order.setAmount(amount);
+    public void createOrder(Order order) {
         getRestTemplate().postForObject(coreUrl+"/api/flatSocialOrders/",order,Order.class);
     }
 }

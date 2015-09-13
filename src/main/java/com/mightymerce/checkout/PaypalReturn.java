@@ -73,45 +73,27 @@ public class PaypalReturn {
     	PayPal pp = new PayPal();   	
     	//Map<String, String> result = new HashMap<String, String>();
     	// If the Request object contains the variable 'token' then it means that the user is coming from PayPal site.	
+    	Map<String,String> shippingDetailsResults = null;
     	if (isSet(token))
     	{
     		/*
     		* Calls the GetExpressCheckoutDetails API call
     		*/
-    		Map<String,String> results = pp.getShippingDetails(token );
-    	    String strAck = results.get("ACK").toString();
+    		shippingDetailsResults = pp.getShippingDetails(token );
+    	    String strAck = shippingDetailsResults.get("ACK").toString();
     		if(strAck !=null && (strAck.equalsIgnoreCase("SUCCESS") || strAck.equalsIgnoreCase("SUCCESSWITHWARNING") ))
     		{
-    	    	session.setAttribute("payer_id", results.get("PAYERID"));
+    	    	session.setAttribute("payer_id", shippingDetailsResults.get("PAYERID"));
     			//result.putAll(results);
-    			model.addAllAttributes(results);
-    			/*
-    			* The information that is returned by the GetExpressCheckoutDetails call should be integrated by the partner into his Order Review 
-    			* page		
-    			*/
-    			String email 				= results.get("EMAIL"); // ' Email address of payer.
-    			String payerId 			= results.get("PAYERID"); // ' Unique PayPal customer account identification number.
-    			String payerStatus		= results.get("PAYERSTATUS"); // ' Status of payer. Character length and limitations: 10 single-byte alphabetic characters.
-    			String firstName			= results.get("FIRSTNAME"); // ' Payer's first name.
-    			String lastName			= results.get("LASTNAME"); // ' Payer's last name.
-    			String shipToName			= results.get("PAYMENTREQUEST_0_SHIPTONAME"); // ' Person's name associated with this address.
-    			String shipToStreet		= results.get("PAYMENTREQUEST_0_SHIPTOSTREET"); // ' First street address.
-    			String shipToCity			= results.get("PAYMENTREQUEST_0_SHIPTOCITY"); // ' Name of city.
-    			String shipToState		= results.get("PAYMENTREQUEST_0_SHIPTOSTATE"); // ' State or province
-    			String shipToCntryCode	= results.get("PAYMENTREQUEST_0_SHIPTOCOUNTRYCODE"); // ' Country code. 
-    			String shipToZip			= results.get("PAYMENTREQUEST_0_SHIPTOZIP"); // ' U.S. Zip code or other country-specific postal code.
-    			String addressStatus 		= results.get("ADDRESSSTATUS"); // ' Status of street address on file with PayPal 
-    			String totalAmt   		= results.get("PAYMENTREQUEST_0_AMT"); // ' Total Amount to be paid by buyer
-    			String currencyCode       = results.get("CURRENCYCODE"); // 'Currency being used 
-    			
+    			model.addAllAttributes(shippingDetailsResults);	
     		} 
     		else  
     		{
     			//Display a user friendly Error on the page using any of the following error information returned by PayPal
-                String errorCode = results.get("L_ERRORCODE0").toString();
-                String errorShortMsg = results.get("L_SHORTMESSAGE0").toString();
-                String errorLongMsg = results.get("L_LONGMESSAGE0").toString();
-                String errorSeverityCode = results.get("L_SEVERITYCODE0").toString();
+                String errorCode = shippingDetailsResults.get("L_ERRORCODE0").toString();
+                String errorShortMsg = shippingDetailsResults.get("L_SHORTMESSAGE0").toString();
+                String errorLongMsg = shippingDetailsResults.get("L_LONGMESSAGE0").toString();
+                String errorSeverityCode = shippingDetailsResults.get("L_SEVERITYCODE0").toString();
                 
                 String errorString = "SetExpressCheckout API call failed. "+
 
@@ -130,7 +112,6 @@ public class PaypalReturn {
 		checkoutDetails.putAll(setRequestParams(request));
 		checkoutDetails.put("TOKEN", token);
 		checkoutDetails.put("payer_id", (String) session.getAttribute("payer_id"));
-		//result.put("PAYMENTREQUEST_0_SHIPPINGAMT", checkoutDetails.get("PAYMENTREQUEST_0_SHIPPINGAMT"))	;	
 		model.addAttribute("PAYMENTREQUEST_0_SHIPPINGAMT", checkoutDetails.get("PAYMENTREQUEST_0_SHIPPINGAMT"));
 		if(isSet(request.getParameter("shipping_method"))){
     		BigDecimal newShipping = new BigDecimal(checkoutDetails.get("shipping_method")); //need to change this value, just for testing
@@ -159,13 +140,11 @@ public class PaypalReturn {
 	    	String strAck = results.get("ACK").toString().toUpperCase();
 	    	
 	    	if(strAck !=null && (strAck.equalsIgnoreCase("Success") || strAck.equalsIgnoreCase("SuccessWithWarning"))){
-//		    	result.putAll(results);
 		    	model.addAllAttributes(results);
-//		    	result.putAll(checkoutDetails);
 		    	model.addAllAttributes(checkoutDetails);
 		    	request.setAttribute("ack", strAck);
 		    	session.invalidate();
-		    	updateCoreWithCheckoutDetails(results, checkoutDetails, strAck);
+		    	updateCoreWithCheckoutDetails(results, checkoutDetails, shippingDetailsResults, strAck);
 		    	if(request.getAttribute("payment_method").equals("credit_card"))  { 
 		    		page="return_4_credit_card";
 		    	} else {
@@ -189,25 +168,61 @@ public class PaypalReturn {
     	}else{
     		page="review";
     	}
-//    	request.setAttribute("result", result);
     	return page;
     }
 	
    
     
    
-    private void updateCoreWithCheckoutDetails(HashMap results, Map<String, String> checkoutDetails, String strAck) {
+    private void updateCoreWithCheckoutDetails(HashMap results, Map<String, String> checkoutDetails, Map<String,String> shippingDetailsResults, String strAck) {
     	//extract L_PAYMENTREQUEST_0_NUMBER0 from checkoutDetails
         Long articleId = Long.parseLong(checkoutDetails.get("L_PAYMENTREQUEST_0_NUMBER0"));
         String payerId = checkoutDetails.get("payer_id");
         String txId = (String) results.get("PAYMENTINFO_0_TRANSACTIONID");
         String paymentStatus = (String) results.get("PAYMENTINFO_0_PAYMENTSTATUS");
         String amtStr = (String) results.get("PAYMENTINFO_0_AMT");
+        /*
+		* The information that is returned by the GetExpressCheckoutDetails call should be integrated by the partner into his Order Review 
+		* page		
+		*/
+		String email 				= shippingDetailsResults.get("EMAIL"); // ' Email address of payer.
+//		String payerId 			= shippingDetailsResults.get("PAYERID"); // ' Unique PayPal customer account identification number.
+		String payerStatus		= shippingDetailsResults.get("PAYERSTATUS"); // ' Status of payer. Character length and limitations: 10 single-byte alphabetic characters.
+		String firstName			= shippingDetailsResults.get("FIRSTNAME"); // ' Payer's first name.
+		String lastName			= shippingDetailsResults.get("LASTNAME"); // ' Payer's last name.
+		String shipToName			= shippingDetailsResults.get("PAYMENTREQUEST_0_SHIPTONAME"); // ' Person's name associated with this address.
+		String shipToStreet		= shippingDetailsResults.get("PAYMENTREQUEST_0_SHIPTOSTREET"); // ' First street address.
+		String shipToCity			= shippingDetailsResults.get("PAYMENTREQUEST_0_SHIPTOCITY"); // ' Name of city.
+		String shipToState		= shippingDetailsResults.get("PAYMENTREQUEST_0_SHIPTOSTATE"); // ' State or province
+		String shipToCntryCode	= shippingDetailsResults.get("PAYMENTREQUEST_0_SHIPTOCOUNTRYCODE"); // ' Country code. 
+		String shipToZip			= shippingDetailsResults.get("PAYMENTREQUEST_0_SHIPTOZIP"); // ' U.S. Zip code or other country-specific postal code.
+		String addressStatus 		= shippingDetailsResults.get("ADDRESSSTATUS"); // ' Status of street address on file with PayPal 
+//		String totalAmt   		= shippingDetailsResults.get("PAYMENTREQUEST_0_AMT"); // ' Total Amount to be paid by buyer
+		String currencyCode       = shippingDetailsResults.get("CURRENCYCODE"); // 'Currency being used 
+	
+		BigDecimal amount = new BigDecimal(Double.parseDouble(amtStr));
+		Order order = new Order();
+        order.setArticle(articleId);
+        order.setTransactionId(txId);
+        order.setPaymentStatus(paymentStatus);
+        order.setEmail(email);
+        order.setPayerId(payerId);
+        order.setPayerStatus(payerStatus);
+        order.setFirstName(firstName);
+        order.setLastName(lastName);
+        order.setShipToName(shipToName);
+        order.setShipToStreet(shipToStreet);
+        order.setShipToCity(shipToCity);
+        order.setShipToState(shipToState);
+        order.setShipToCntryCode(shipToCntryCode);
+        order.setShipToZip(shipToZip);
+        order.setAddressStatus(addressStatus);
+        order.setTotalAmt(amount);
+        order.setCurrencyCode(currencyCode);
         if(!isTestmode){
 	    	AccessGrant ag = oAuth2Template.exchangeCredentialsForAccess(mightyUser, mightyPw,params);
 	        MightyCore mightyCore = new MightyCore(ag.getAccessToken(), TokenStrategy.AUTHORIZATION_HEADER, coreUrl);
-	        BigDecimal amount = new BigDecimal(Double.parseDouble(amtStr));	
-	        mightyCore.createOrder(articleId, payerId, txId, paymentStatus, amount);
+	        mightyCore.createOrder(order);
         }
 	}
 
