@@ -25,11 +25,20 @@ function calculatePrices() {
     } else {
     	singlePrice = singlePriceData;
     }
-    console.log(singlePrice)
-    console.log(typeof singlePrice)
-    
+    console.log(singlePrice);
+    console.log(typeof singlePrice);
+
+    var shippingData = $('.lbl-shipping').data('value');
+    var shipping;
+    if (typeof shippingData == 'string') {
+        shipping = parseFloat(shippingData)
+    } else {
+        shipping = shippingData;
+    }
+    console.log(shipping);
+    console.log(typeof shipping);
+
     var amount = $('.amount').val();
-    var shipping = $('.lbl-shipping').data('value');
     var subtotal = amount * singlePrice;
     var total = subtotal + shipping;
     var vat = total * 19 / 100;
