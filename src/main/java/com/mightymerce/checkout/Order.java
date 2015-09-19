@@ -2,16 +2,20 @@ package com.mightymerce.checkout;
 
 import java.math.BigDecimal;
 
+import javax.validation.constraints.Digits;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.data.annotation.Id;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Order {
 
+	@Id private String id;
     private Long article;
     private String transactionId;    
     private String paymentStatus;
     private String email; 			
-    private  String payerId 		;	// ' Unique PayPal customer account identification number.
+    private String payerId 		;	// ' Unique PayPal customer account identification number.
     private String payerStatus	;	// ' Status of payer. Character length and limitations: 10 single-byte alphabetic characters.
     private String firstName	;	// ' Payer's first name.
     private String lastName		;	// ' Payer's last name.
@@ -22,7 +26,7 @@ public class Order {
     private String shipToCntryCode;	// ' Country code. 
     private String shipToZip	;	// ' U.S. Zip code or other country-specific postal code.
     private String addressStatus;	// ' Status of street address on file with PayPal 
-    private BigDecimal totalAmt ;	// ' Total Amount to be paid by buyer
+    private String totalAmt ;	// ' Total Amount to be paid by buyer
     private String currencyCode ;    // 'Currency being used 
 	
 	public Long getArticle() {
@@ -145,11 +149,11 @@ public class Order {
 		this.addressStatus = addressStatus;
 	}
 
-	public BigDecimal getTotalAmt() {
+	public String getTotalAmt() {
 		return totalAmt;
 	}
 
-	public void setTotalAmt(BigDecimal totalAmt) {
+	public void setTotalAmt(String totalAmt) {
 		this.totalAmt = totalAmt;
 	}
 

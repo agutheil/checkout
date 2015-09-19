@@ -34,6 +34,9 @@ public class PaypalReturn {
 	@Autowired
 	private HttpServletResponse response;
 	
+	@Autowired
+	private OrderRepository orderRepository;
+	
 	private OAuth2Template oAuth2Template;
 	private MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
 	@Value("${mightymerce.coreUrl}")
@@ -180,7 +183,7 @@ public class PaypalReturn {
         String payerId = checkoutDetails.get("payer_id");
         String txId = (String) results.get("PAYMENTINFO_0_TRANSACTIONID");
         String paymentStatus = (String) results.get("PAYMENTINFO_0_PAYMENTSTATUS");
-        String amtStr = (String) results.get("PAYMENTINFO_0_AMT");
+//        String amtStr = (String) results.get("PAYMENTINFO_0_AMT");
         /*
 		* The information that is returned by the GetExpressCheckoutDetails call should be integrated by the partner into his Order Review 
 		* page		
@@ -197,10 +200,9 @@ public class PaypalReturn {
 		String shipToCntryCode	= shippingDetailsResults.get("PAYMENTREQUEST_0_SHIPTOCOUNTRYCODE"); // ' Country code. 
 		String shipToZip			= shippingDetailsResults.get("PAYMENTREQUEST_0_SHIPTOZIP"); // ' U.S. Zip code or other country-specific postal code.
 		String addressStatus 		= shippingDetailsResults.get("ADDRESSSTATUS"); // ' Status of street address on file with PayPal 
-//		String totalAmt   		= shippingDetailsResults.get("PAYMENTREQUEST_0_AMT"); // ' Total Amount to be paid by buyer
+		String totalAmt   		= shippingDetailsResults.get("PAYMENTREQUEST_0_AMT"); // ' Total Amount to be paid by buyer
 		String currencyCode       = shippingDetailsResults.get("CURRENCYCODE"); // 'Currency being used 
-	
-		BigDecimal amount = new BigDecimal(Double.parseDouble(amtStr));
+
 		Order order = new Order();
         order.setArticle(articleId);
         order.setTransactionId(txId);
@@ -217,13 +219,14 @@ public class PaypalReturn {
         order.setShipToCntryCode(shipToCntryCode);
         order.setShipToZip(shipToZip);
         order.setAddressStatus(addressStatus);
-        order.setTotalAmt(amount);
+        order.setTotalAmt(totalAmt);
         order.setCurrencyCode(currencyCode);
         if(!isTestmode){
 	    	AccessGrant ag = oAuth2Template.exchangeCredentialsForAccess(mightyUser, mightyPw,params);
 	        MightyCore mightyCore = new MightyCore(ag.getAccessToken(), TokenStrategy.AUTHORIZATION_HEADER, coreUrl);
 	        mightyCore.createOrder(order);
         }
+        order = orderRepository.save(order);
 	}
 
     @RequestMapping(method = RequestMethod.POST)
