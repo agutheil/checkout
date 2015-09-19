@@ -1,4 +1,4 @@
-package com.mightymerce.checkout;
+	package com.mightymerce.checkout;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -221,11 +221,11 @@ public class PaypalReturn {
         order.setAddressStatus(addressStatus);
         order.setTotalAmt(totalAmt);
         order.setCurrencyCode(currencyCode);
-        if(!isTestmode){
-	    	AccessGrant ag = oAuth2Template.exchangeCredentialsForAccess(mightyUser, mightyPw,params);
-	        MightyCore mightyCore = new MightyCore(ag.getAccessToken(), TokenStrategy.AUTHORIZATION_HEADER, coreUrl);
-	        mightyCore.createOrder(order);
-        }
+//        if(!isTestmode){
+//	    	AccessGrant ag = oAuth2Template.exchangeCredentialsForAccess(mightyUser, mightyPw,params);
+//	        MightyCore mightyCore = new MightyCore(ag.getAccessToken(), TokenStrategy.AUTHORIZATION_HEADER, coreUrl);
+//	        mightyCore.createOrder(order);
+//        }
         order = orderRepository.save(order);
 	}
 

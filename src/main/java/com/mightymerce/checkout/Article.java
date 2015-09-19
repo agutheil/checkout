@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.math.BigDecimal;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 
 /**
  * Created by agutheil on 11.05.15.
@@ -29,6 +30,7 @@ public class Article {
 
 	@Id private String id;
 
+	@Indexed
 	private String articleId;
 
     private String name;

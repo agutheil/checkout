@@ -1,9 +1,5 @@
 package com.mightymerce.checkout;
 
-import java.math.BigDecimal;
-
-import javax.validation.constraints.Digits;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.Id;
 
@@ -28,6 +24,7 @@ public class Order {
     private String addressStatus;	// ' Status of street address on file with PayPal 
     private String totalAmt ;	// ' Total Amount to be paid by buyer
     private String currencyCode ;    // 'Currency being used 
+     
 	
 	public Long getArticle() {
 		return article;

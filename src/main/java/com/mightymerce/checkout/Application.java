@@ -24,6 +24,22 @@ public class Application implements CommandLineRunner{
 	public void run(String... args) throws Exception {
     	
     	orderRepository.deleteAll();
+    	
+//    	Order order = new Order();
+//    	order.setArticle(1L);
+//    	orderRepository.save(order);
+//    	
+//    	Order order2 = new Order();
+//    	order2.setArticle(2L);
+//    	orderRepository.save(order2);
+    	
+    	// fetch all customers
+		System.out.println("Orders found with findAll():");
+		System.out.println("-------------------------------");
+		for (Order o : orderRepository.findAll()) {
+			System.out.println(o);
+		}
+		System.out.println();
 
 		articleRepository.deleteAll();
 
