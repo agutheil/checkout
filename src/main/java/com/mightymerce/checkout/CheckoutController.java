@@ -17,30 +17,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 @Controller
 @RequestMapping("/")
 public class CheckoutController {
-
-
-    private OAuth2Template oAuth2Template;
-
-    @Value("${mightymerce.coreUrl}")
-    private String coreUrl;
-    
-    @Value("${mightymerce.istestmode}")
-    private boolean isTestmode;
-
-
-    private MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
-
-    @Inject
-    public CheckoutController(OAuth2Template oAuth2Template) {
-        this.oAuth2Template = oAuth2Template;
-        params.set("scope", "read write");
-
-    }
+	
+	@Autowired
+	private ArticleRepository articleRepository;
 
     @RequestMapping(value = "checkout/{articleId}", method=RequestMethod.GET)
     public String checkout(@PathVariable String articleId, Model model) {
@@ -56,20 +41,7 @@ public class CheckoutController {
     }
 
 	private Article retrieveArticle(String articleId) {
-		Article article;
-		if (!isTestmode){
-			AccessGrant ag = oAuth2Template.exchangeCredentialsForAccess("admin", "admin",params);
-	        MightyCore mightyCore = new MightyCore(ag.getAccessToken(), TokenStrategy.AUTHORIZATION_HEADER, coreUrl);
-	        article = mightyCore.getArticle(articleId);
-		} else {
-			article = new Article();
-			article.setName("Mein Name");
-			article.setPrice(BigDecimal.valueOf(11.55));
-			article.setDeliveryCosts(BigDecimal.valueOf(3.95));
-			article.setCurrency("EUR");
-			article.setDescription("Meine Beschreibung");
-		}
-		return article;
+		return articleRepository.findByArticleId(articleId);
 	}
 
     @RequestMapping(value = "success", method=RequestMethod.GET)
