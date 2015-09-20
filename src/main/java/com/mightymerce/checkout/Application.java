@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
+@EnableScheduling
 public class Application implements CommandLineRunner{
 
 	@Autowired
@@ -43,9 +45,9 @@ public class Application implements CommandLineRunner{
 
 		articleRepository.deleteAll();
 
-		// save a couple of customers
-		articleRepository.save(new Article("1", "Artikel 1", "Beschreibung 1", BigDecimal.valueOf(11.55), BigDecimal.valueOf(3.95), "EUR"));
-		articleRepository.save(new Article("2", "Artikel 2", "Beschreibung 2", BigDecimal.valueOf(199.55), BigDecimal.valueOf(13.95), "EUR"));
+//		// save a couple of Articles
+//		articleRepository.save(new Article("1", "Artikel 1", "Beschreibung 1", BigDecimal.valueOf(11.55), BigDecimal.valueOf(3.95), "EUR"));
+//		articleRepository.save(new Article("2", "Artikel 2", "Beschreibung 2", BigDecimal.valueOf(199.55), BigDecimal.valueOf(13.95), "EUR"));
 
 		// fetch all customers
 		System.out.println("Customers found with findAll():");
@@ -56,14 +58,14 @@ public class Application implements CommandLineRunner{
 		System.out.println();
 
 		// fetch an individual customer
-		System.out.println("Article found with findByArticleId('1'):");
-		System.out.println("--------------------------------");
-		System.out.println(articleRepository.findByArticleId("1"));
-		System.out.println();
-
-		System.out.println("Article found with findByArticleId('2'):");
-		System.out.println("--------------------------------");
-		System.out.println(articleRepository.findByArticleId("1"));
+//		System.out.println("Article found with findByArticleId('1'):");
+//		System.out.println("--------------------------------");
+//		System.out.println(articleRepository.findByArticleId("1"));
+//		System.out.println();
+//
+//		System.out.println("Article found with findByArticleId('2'):");
+//		System.out.println("--------------------------------");
+//		System.out.println(articleRepository.findByArticleId("1"));
 
 	}
 

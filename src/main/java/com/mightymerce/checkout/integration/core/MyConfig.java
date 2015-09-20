@@ -1,4 +1,4 @@
-package com.mightymerce.checkout;
+package com.mightymerce.checkout.integration.core;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,10 +1,14 @@
-package com.mightymerce.checkout;
+package com.mightymerce.checkout.integration.core;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.oauth2.TokenStrategy;
 
+import com.mightymerce.checkout.Article;
 import com.mightymerce.checkout.Order;
 
 /**
@@ -30,9 +34,14 @@ public class MightyCore extends AbstractOAuth2ApiBinding {
         this.coreUrl = coreUrl;
     }
 
-    public Article getArticle(String articleId) {
-        Article article = getRestTemplate().getForObject(coreUrl+"/api/articles/"+articleId, Article.class);
+    public CoreArticle getArticle(String articleId) {
+    	CoreArticle article = getRestTemplate().getForObject(coreUrl+"/api/articles/"+articleId, CoreArticle.class);
         return article;
+    }
+    public List<CoreArticle> getArticles() {
+    	ResponseEntity<CoreArticle[]> responseEntity = getRestTemplate().getForEntity(coreUrl+"/api/articles", CoreArticle[].class);
+    	CoreArticle[] articles = responseEntity.getBody();
+    	return Arrays.asList(articles);
     }
     
     public void createOrder(Order order) {

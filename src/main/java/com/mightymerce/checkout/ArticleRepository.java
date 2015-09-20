@@ -7,6 +7,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 @RepositoryRestResource(collectionResourceRel = "article", path = "article")
 public interface ArticleRepository extends MongoRepository<Article, String>{
 
-	Article findByArticleId(@Param("articleId") String articleId);
+	Article findByArticleId(@Param("articleId") Long articleId);
 
 }

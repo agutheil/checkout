@@ -28,7 +28,7 @@ public class CheckoutController {
 	private ArticleRepository articleRepository;
 
     @RequestMapping(value = "checkout/{articleId}", method=RequestMethod.GET)
-    public String checkout(@PathVariable String articleId, Model model) {
+    public String checkout(@PathVariable Long articleId, Model model) {
         model.addAttribute("articleId", articleId);
         Article article = retrieveArticle(articleId);
         model.addAttribute("articleName",article.getName());
@@ -40,7 +40,7 @@ public class CheckoutController {
         return "checkout";
     }
 
-	private Article retrieveArticle(String articleId) {
+	private Article retrieveArticle(Long articleId) {
 		return articleRepository.findByArticleId(articleId);
 	}
 
