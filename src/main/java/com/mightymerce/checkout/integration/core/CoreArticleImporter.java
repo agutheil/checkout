@@ -1,9 +1,5 @@
 package com.mightymerce.checkout.integration.core;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -18,6 +14,10 @@ import com.mightymerce.checkout.repository.ArticleRepository;
 @Component
 public class CoreArticleImporter {
 	private final Logger log = LoggerFactory.getLogger(CoreArticleImporter.class);
+	
+	@Autowired
+	CoreArticleToArticleConverter converter;
+	
 	@Autowired
 	CoreArticleRepository coreArticleRepository;
 	
@@ -27,15 +27,18 @@ public class CoreArticleImporter {
 	@Scheduled(fixedRate = 5000)
 	public void importArticles() {
 		log.info("Importing Articles from core ...");
-		List<Article> articles = coreArticleRepository.retrieveArticles();
-		for (Article article : articles) {
-			log.info("Checking if article exists with articleId "+article.getCoreId());
-			if (articleRepository.findByCoreId(article.getCoreId()) == null) {
-				log.info("Saving article ..."+article);
-				articleRepository.save(article);
+		List<CoreArticle> coreArticles = coreArticleRepository.retrieveArticles();
+		for (CoreArticle coreArticle : coreArticles) {
+			log.info("Importing article with articleId "+coreArticle.getId());
+			Article article = articleRepository.findByCoreId(coreArticle.getId());
+			if ( article == null) {
+				log.info("Creating article ...");
+				article = converter.convert(new Article(), coreArticle);
 			} else {
-				log.info("Article already exists");
+				log.info("Updating article ...");
+				article = converter.convert(article, coreArticle);
 			}
+			articleRepository.save(article);
 		}
 	}
 }

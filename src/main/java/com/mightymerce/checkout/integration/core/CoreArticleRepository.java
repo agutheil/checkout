@@ -18,8 +18,6 @@ import com.mightymerce.checkout.domain.Article;
 @Repository
 public class CoreArticleRepository {
 	private OAuth2Template oAuth2Template;
-	
-	private CoreArticleToArticleConverter converter;
 
 	private MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
 
@@ -33,29 +31,15 @@ public class CoreArticleRepository {
     private String corePassword;
 
     @Inject
-    public CoreArticleRepository(OAuth2Template oAuth2Template, CoreArticleToArticleConverter converter) {
+    public CoreArticleRepository(OAuth2Template oAuth2Template) {
         this.oAuth2Template = oAuth2Template;
         params.set("scope", "read");
-        this.converter = converter;
-
     }
     
-    public Article retrieveArticle(String articleId) {
-    	Article article;
-    	AccessGrant ag = oAuth2Template.exchangeCredentialsForAccess(coreUser, corePassword, params);
-    	MightyCore mightyCore = new MightyCore(ag.getAccessToken(), TokenStrategy.AUTHORIZATION_HEADER, coreUrl);
-    	CoreArticle coreArticle = mightyCore.getArticle(articleId);
-    	article = converter.convert(coreArticle);
-    	return article;
-    }
-    public List<Article> retrieveArticles() {
-		List<Article> articles = new ArrayList<>();
+    public List<CoreArticle> retrieveArticles() {
 		AccessGrant ag = oAuth2Template.exchangeCredentialsForAccess(coreUser, corePassword, params);
         MightyCore mightyCore = new MightyCore(ag.getAccessToken(), TokenStrategy.AUTHORIZATION_HEADER, coreUrl);
         List<CoreArticle> coreArticles = mightyCore.getArticles();
-        for (CoreArticle coreArticle : coreArticles) {
-        	articles.add(converter.convert(coreArticle));
-		}
-		return articles;
+		return coreArticles;
 	}
 }

@@ -7,8 +7,7 @@ import com.mightymerce.checkout.domain.enumeration.Currency;
 
 @Component
 public class CoreArticleToArticleConverter {
-	Article convert(CoreArticle coreArticle) {
-		Article article = new Article();
+	Article convert(Article article, CoreArticle coreArticle) {
 		article.setCoreId(coreArticle.getId());
 		article.setCode(coreArticle.getCode());
 		article.setName(coreArticle.getName());
