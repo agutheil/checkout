@@ -80,7 +80,7 @@ class OrderGatlingTest extends Simulation {
             .exec(http("Create new order")
             .post("/api/orders")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "coreArticleId":null, "transationId":"SAMPLE_TEXT", "paymentStatus":"SAMPLE_TEXT", "email":"SAMPLE_TEXT", "payerId":"SAMPLE_TEXT", "payerStatus":"SAMPLE_TEXT", "firstName":"SAMPLE_TEXT", "lastName":"SAMPLE_TEXT", "shipToName":"SAMPLE_TEXT", "shipToStreet":"SAMPLE_TEXT", "shipToCity":"SAMPLE_TEXT", "shipToState":"SAMPLE_TEXT", "shipToCntryCode":"SAMPLE_TEXT", "shipToZip":"SAMPLE_TEXT", "addressStatus":"SAMPLE_TEXT", "totalAmt":"SAMPLE_TEXT", "currencyCode":null}""")).asJSON
+            .body(StringBody("""{"id":null, "coreArticleId":null, "transactionId":"SAMPLE_TEXT", "paymentStatus":"SAMPLE_TEXT", "email":"SAMPLE_TEXT", "payerId":"SAMPLE_TEXT", "payerStatus":"SAMPLE_TEXT", "firstName":"SAMPLE_TEXT", "lastName":"SAMPLE_TEXT", "shipToName":"SAMPLE_TEXT", "shipToStreet":"SAMPLE_TEXT", "shipToCity":"SAMPLE_TEXT", "shipToState":"SAMPLE_TEXT", "shipToCntryCode":"SAMPLE_TEXT", "shipToZip":"SAMPLE_TEXT", "addressStatus":"SAMPLE_TEXT", "totalAmt":"SAMPLE_TEXT", "currencyCode":null}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_order_url")))
             .pause(10)

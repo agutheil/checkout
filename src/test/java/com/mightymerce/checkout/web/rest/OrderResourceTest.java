@@ -43,8 +43,8 @@ public class OrderResourceTest {
 
     private static final Long DEFAULT_CORE_ARTICLE_ID = 1L;
     private static final Long UPDATED_CORE_ARTICLE_ID = 2L;
-    private static final String DEFAULT_TRANSATION_ID = "SAMPLE_TEXT";
-    private static final String UPDATED_TRANSATION_ID = "UPDATED_TEXT";
+    private static final String DEFAULT_TRANSACTION_ID = "SAMPLE_TEXT";
+    private static final String UPDATED_TRANSACTION_ID = "UPDATED_TEXT";
     private static final String DEFAULT_PAYMENT_STATUS = "SAMPLE_TEXT";
     private static final String UPDATED_PAYMENT_STATUS = "UPDATED_TEXT";
     private static final String DEFAULT_EMAIL = "SAMPLE_TEXT";
@@ -100,7 +100,7 @@ public class OrderResourceTest {
         orderRepository.deleteAll();
         order = new Order();
         order.setCoreArticleId(DEFAULT_CORE_ARTICLE_ID);
-        order.setTransationId(DEFAULT_TRANSATION_ID);
+        order.setTransactionId(DEFAULT_TRANSACTION_ID);
         order.setPaymentStatus(DEFAULT_PAYMENT_STATUS);
         order.setEmail(DEFAULT_EMAIL);
         order.setPayerId(DEFAULT_PAYER_ID);
@@ -134,7 +134,7 @@ public class OrderResourceTest {
         assertThat(orders).hasSize(databaseSizeBeforeCreate + 1);
         Order testOrder = orders.get(orders.size() - 1);
         assertThat(testOrder.getCoreArticleId()).isEqualTo(DEFAULT_CORE_ARTICLE_ID);
-        assertThat(testOrder.getTransationId()).isEqualTo(DEFAULT_TRANSATION_ID);
+        assertThat(testOrder.getTransactionId()).isEqualTo(DEFAULT_TRANSACTION_ID);
         assertThat(testOrder.getPaymentStatus()).isEqualTo(DEFAULT_PAYMENT_STATUS);
         assertThat(testOrder.getEmail()).isEqualTo(DEFAULT_EMAIL);
         assertThat(testOrder.getPayerId()).isEqualTo(DEFAULT_PAYER_ID);
@@ -163,7 +163,7 @@ public class OrderResourceTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(order.getId())))
                 .andExpect(jsonPath("$.[*].coreArticleId").value(hasItem(DEFAULT_CORE_ARTICLE_ID.intValue())))
-                .andExpect(jsonPath("$.[*].transationId").value(hasItem(DEFAULT_TRANSATION_ID.toString())))
+                .andExpect(jsonPath("$.[*].transactionId").value(hasItem(DEFAULT_TRANSACTION_ID.toString())))
                 .andExpect(jsonPath("$.[*].paymentStatus").value(hasItem(DEFAULT_PAYMENT_STATUS.toString())))
                 .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())))
                 .andExpect(jsonPath("$.[*].payerId").value(hasItem(DEFAULT_PAYER_ID.toString())))
@@ -192,7 +192,7 @@ public class OrderResourceTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(order.getId()))
             .andExpect(jsonPath("$.coreArticleId").value(DEFAULT_CORE_ARTICLE_ID.intValue()))
-            .andExpect(jsonPath("$.transationId").value(DEFAULT_TRANSATION_ID.toString()))
+            .andExpect(jsonPath("$.transactionId").value(DEFAULT_TRANSACTION_ID.toString()))
             .andExpect(jsonPath("$.paymentStatus").value(DEFAULT_PAYMENT_STATUS.toString()))
             .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL.toString()))
             .andExpect(jsonPath("$.payerId").value(DEFAULT_PAYER_ID.toString()))
@@ -226,7 +226,7 @@ public class OrderResourceTest {
 
         // Update the order
         order.setCoreArticleId(UPDATED_CORE_ARTICLE_ID);
-        order.setTransationId(UPDATED_TRANSATION_ID);
+        order.setTransactionId(UPDATED_TRANSACTION_ID);
         order.setPaymentStatus(UPDATED_PAYMENT_STATUS);
         order.setEmail(UPDATED_EMAIL);
         order.setPayerId(UPDATED_PAYER_ID);
@@ -254,7 +254,7 @@ public class OrderResourceTest {
         assertThat(orders).hasSize(databaseSizeBeforeUpdate);
         Order testOrder = orders.get(orders.size() - 1);
         assertThat(testOrder.getCoreArticleId()).isEqualTo(UPDATED_CORE_ARTICLE_ID);
-        assertThat(testOrder.getTransationId()).isEqualTo(UPDATED_TRANSATION_ID);
+        assertThat(testOrder.getTransactionId()).isEqualTo(UPDATED_TRANSACTION_ID);
         assertThat(testOrder.getPaymentStatus()).isEqualTo(UPDATED_PAYMENT_STATUS);
         assertThat(testOrder.getEmail()).isEqualTo(UPDATED_EMAIL);
         assertThat(testOrder.getPayerId()).isEqualTo(UPDATED_PAYER_ID);

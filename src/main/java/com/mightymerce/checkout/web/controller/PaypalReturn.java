@@ -191,7 +191,7 @@ public class PaypalReturn {
 
 		Order order = new Order();
         order.setCoreArticleId(articleId);
-        order.setTransationId(txId);
+        order.setTransactionId(txId);
         order.setPaymentStatus(paymentStatus);
         order.setEmail(email);
         order.setPayerId(payerId);

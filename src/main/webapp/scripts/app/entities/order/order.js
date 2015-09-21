@@ -51,7 +51,7 @@ angular.module('checkoutApp')
                         size: 'lg',
                         resolve: {
                             entity: function () {
-                                return {coreArticleId: null, transationId: null, paymentStatus: null, email: null, payerId: null, payerStatus: null, firstName: null, lastName: null, shipToName: null, shipToStreet: null, shipToCity: null, shipToState: null, shipToCntryCode: null, shipToZip: null, addressStatus: null, totalAmt: null, currencyCode: null, id: null};
+                                return {coreArticleId: null, transactionId: null, paymentStatus: null, email: null, payerId: null, payerStatus: null, firstName: null, lastName: null, shipToName: null, shipToStreet: null, shipToCity: null, shipToState: null, shipToCntryCode: null, shipToZip: null, addressStatus: null, totalAmt: null, currencyCode: null, id: null};
                             }
                         }
                     }).result.then(function(result) {

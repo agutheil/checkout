@@ -22,8 +22,8 @@ public class Order implements Serializable {
     @Field("core_article_id")
     private Long coreArticleId;
     
-    @Field("transation_id")
-    private String transationId;
+    @Field("transaction_id")
+    private String transactionId;
     
     @Field("payment_status")
     private String paymentStatus;
@@ -86,12 +86,12 @@ public class Order implements Serializable {
         this.coreArticleId = coreArticleId;
     }
 
-    public String getTransationId() {
-        return transationId;
+    public String getTransactionId() {
+        return transactionId;
     }
 
-    public void setTransationId(String transationId) {
-        this.transationId = transationId;
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
     }
 
     public String getPaymentStatus() {
@@ -240,7 +240,7 @@ public class Order implements Serializable {
         return "Order{" +
                 "id=" + id +
                 ", coreArticleId='" + coreArticleId + "'" +
-                ", transationId='" + transationId + "'" +
+                ", transactionId='" + transactionId + "'" +
                 ", paymentStatus='" + paymentStatus + "'" +
                 ", email='" + email + "'" +
                 ", payerId='" + payerId + "'" +
