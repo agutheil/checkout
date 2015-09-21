@@ -133,7 +133,8 @@ public class PaypalReturn {
 		    	model.addAllAttributes(checkoutDetails);
 		    	request.setAttribute("ack", strAck);
 		    	session.invalidate();
-		    	saveOrder(results, checkoutDetails, shippingDetailsResults, strAck);
+		    	String orderId = saveOrder(results, checkoutDetails, shippingDetailsResults, strAck);
+		    	model.addAttribute("orderId", orderId);
 		    	if(request.getAttribute("payment_method").equals("credit_card"))  { 
 		    		page="return_4_credit_card";
 		    	} else {
@@ -163,7 +164,7 @@ public class PaypalReturn {
    
     
    
-    private void saveOrder(HashMap results, Map<String, String> checkoutDetails, Map<String,String> shippingDetailsResults, String strAck) {
+    private String saveOrder(HashMap results, Map<String, String> checkoutDetails, Map<String,String> shippingDetailsResults, String strAck) {
     	//extract L_PAYMENTREQUEST_0_NUMBER0 from checkoutDetails
         Long articleId = Long.parseLong(checkoutDetails.get("L_PAYMENTREQUEST_0_NUMBER0"));
         String payerId = checkoutDetails.get("payer_id");
@@ -208,6 +209,7 @@ public class PaypalReturn {
         order.setTotalAmt(totalAmt);
         order.setCurrencyCode(Currency.valueOf(currencyCode));
         order = orderRepository.save(order);
+        return order.getId();
 	}
 
     @RequestMapping(method = RequestMethod.POST)
