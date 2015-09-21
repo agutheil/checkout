@@ -1,0 +1,159 @@
+
+<div>
+    <h2><span>Order</span> {{order.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>CoreArticleId</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{order.coreArticleId}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>TransationId</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{order.transationId}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>PaymentStatus</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{order.paymentStatus}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Email</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{order.email}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>PayerId</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{order.payerId}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>PayerStatus</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{order.payerStatus}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>FirstName</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{order.firstName}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>LastName</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{order.lastName}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ShipToName</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{order.shipToName}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ShipToStreet</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{order.shipToStreet}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ShipToCity</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{order.shipToCity}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ShipToState</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{order.shipToState}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ShipToCntryCode</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{order.shipToCntryCode}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ShipToZip</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{order.shipToZip}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>AddressStatus</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{order.addressStatus}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>TotalAmt</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{order.totalAmt}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>CurrencyCode</span>
+                </td>
+                <td>
+                    <span class="input-sm form-control readonly"
+                          translate-interpolation="messageformat"></span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

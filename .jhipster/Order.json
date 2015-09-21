@@ -1,0 +1,93 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "coreArticleId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "transationId",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "paymentStatus",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "email",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "payerId",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "payerStatus",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 7,
+            "fieldName": "firstName",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 8,
+            "fieldName": "lastName",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 9,
+            "fieldName": "shipToName",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 10,
+            "fieldName": "shipToStreet",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 11,
+            "fieldName": "shipToCity",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 12,
+            "fieldName": "shipToState",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 13,
+            "fieldName": "shipToCntryCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 14,
+            "fieldName": "shipToZip",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 15,
+            "fieldName": "addressStatus",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 16,
+            "fieldName": "totalAmt",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 17,
+            "fieldName": "currencyCode",
+            "fieldType": "Currency",
+            "fieldValues": "EUR,GBP,USD,CHF"
+        }
+    ],
+    "dto": "no",
+    "pagination": "no"
+}

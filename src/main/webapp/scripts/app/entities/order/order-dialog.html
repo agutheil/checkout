@@ -1,0 +1,148 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myOrderLabel">Create or edit a Order</h4>
+    </div>
+    <div class="modal-body">
+        <jh-alert-error></jh-alert-error>
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="order.id" readonly>
+        </div>
+
+        <div class="form-group">
+            <label for="field_coreArticleId">CoreArticleId</label>
+            <input type="number" class="form-control" name="coreArticleId" id="field_coreArticleId"
+                    ng-model="order.coreArticleId"
+                    >
+
+        </div>
+        <div class="form-group">
+            <label for="field_transationId">TransationId</label>
+            <input type="text" class="form-control" name="transationId" id="field_transationId"
+                    ng-model="order.transationId"
+                    >
+
+        </div>
+        <div class="form-group">
+            <label for="field_paymentStatus">PaymentStatus</label>
+            <input type="text" class="form-control" name="paymentStatus" id="field_paymentStatus"
+                    ng-model="order.paymentStatus"
+                    >
+
+        </div>
+        <div class="form-group">
+            <label for="field_email">Email</label>
+            <input type="text" class="form-control" name="email" id="field_email"
+                    ng-model="order.email"
+                    >
+
+        </div>
+        <div class="form-group">
+            <label for="field_payerId">PayerId</label>
+            <input type="text" class="form-control" name="payerId" id="field_payerId"
+                    ng-model="order.payerId"
+                    >
+
+        </div>
+        <div class="form-group">
+            <label for="field_payerStatus">PayerStatus</label>
+            <input type="text" class="form-control" name="payerStatus" id="field_payerStatus"
+                    ng-model="order.payerStatus"
+                    >
+
+        </div>
+        <div class="form-group">
+            <label for="field_firstName">FirstName</label>
+            <input type="text" class="form-control" name="firstName" id="field_firstName"
+                    ng-model="order.firstName"
+                    >
+
+        </div>
+        <div class="form-group">
+            <label for="field_lastName">LastName</label>
+            <input type="text" class="form-control" name="lastName" id="field_lastName"
+                    ng-model="order.lastName"
+                    >
+
+        </div>
+        <div class="form-group">
+            <label for="field_shipToName">ShipToName</label>
+            <input type="text" class="form-control" name="shipToName" id="field_shipToName"
+                    ng-model="order.shipToName"
+                    >
+
+        </div>
+        <div class="form-group">
+            <label for="field_shipToStreet">ShipToStreet</label>
+            <input type="text" class="form-control" name="shipToStreet" id="field_shipToStreet"
+                    ng-model="order.shipToStreet"
+                    >
+
+        </div>
+        <div class="form-group">
+            <label for="field_shipToCity">ShipToCity</label>
+            <input type="text" class="form-control" name="shipToCity" id="field_shipToCity"
+                    ng-model="order.shipToCity"
+                    >
+
+        </div>
+        <div class="form-group">
+            <label for="field_shipToState">ShipToState</label>
+            <input type="text" class="form-control" name="shipToState" id="field_shipToState"
+                    ng-model="order.shipToState"
+                    >
+
+        </div>
+        <div class="form-group">
+            <label for="field_shipToCntryCode">ShipToCntryCode</label>
+            <input type="text" class="form-control" name="shipToCntryCode" id="field_shipToCntryCode"
+                    ng-model="order.shipToCntryCode"
+                    >
+
+        </div>
+        <div class="form-group">
+            <label for="field_shipToZip">ShipToZip</label>
+            <input type="text" class="form-control" name="shipToZip" id="field_shipToZip"
+                    ng-model="order.shipToZip"
+                    >
+
+        </div>
+        <div class="form-group">
+            <label for="field_addressStatus">AddressStatus</label>
+            <input type="text" class="form-control" name="addressStatus" id="field_addressStatus"
+                    ng-model="order.addressStatus"
+                    >
+
+        </div>
+        <div class="form-group">
+            <label for="field_totalAmt">TotalAmt</label>
+            <input type="text" class="form-control" name="totalAmt" id="field_totalAmt"
+                    ng-model="order.totalAmt"
+                    >
+
+        </div>
+        <div class="form-group">
+            <label for="field_currencyCode">CurrencyCode</label>
+            <select class="form-control" name="currencyCode" ng-model="order.currencyCode" id="field_currencyCode">
+                <option value="EUR">EUR</option>
+                <option value="GBP">GBP</option>
+                <option value="USD">USD</option>
+                <option value="CHF">CHF</option>
+            </select>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || editForm.$submitted" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

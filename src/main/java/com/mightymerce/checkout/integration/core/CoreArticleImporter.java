@@ -12,8 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import com.mightymerce.checkout.Article;
-import com.mightymerce.checkout.ArticleRepository;
+import com.mightymerce.checkout.domain.Article;
+import com.mightymerce.checkout.repository.ArticleRepository;
 
 @Component
 public class CoreArticleImporter {
@@ -29,8 +29,8 @@ public class CoreArticleImporter {
 		log.info("Importing Articles from core ...");
 		List<Article> articles = coreArticleRepository.retrieveArticles();
 		for (Article article : articles) {
-			log.info("Checking if article exists with articleId "+article.getArticleId());
-			if (articleRepository.findByArticleId(article.getArticleId()) == null) {
+			log.info("Checking if article exists with articleId "+article.getCoreId());
+			if (articleRepository.findByCoreId(article.getCoreId()) == null) {
 				log.info("Saving article ..."+article);
 				articleRepository.save(article);
 			} else {

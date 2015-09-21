@@ -8,8 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.oauth2.TokenStrategy;
 
-import com.mightymerce.checkout.Article;
-import com.mightymerce.checkout.Order;
+import com.mightymerce.checkout.domain.Article;
+import com.mightymerce.checkout.domain.Order;
 
 /**
  * Created by agutheil on 11.05.15.

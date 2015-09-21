@@ -1,0 +1,106 @@
+<div>
+
+    <h2>Orders</h2>
+    <jh-alert></jh-alert>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn btn-primary" ui-sref="order.new">
+                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new Order</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteOrderConfirmation">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form name="deleteForm" ng-submit="confirmDelete(order.id)">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                                ng-click="clear()">&times;</button>
+                        <h4 class="modal-title">Confirm delete operation</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to delete this Order?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+                            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+                        </button>
+                        <button type="submit" ng-disabled="deleteForm.$invalid" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span>Delete</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>CoreArticleId</th>
+                    <th>TransationId</th>
+                    <th>PaymentStatus</th>
+                    <th>Email</th>
+                    <th>PayerId</th>
+                    <th>PayerStatus</th>
+                    <th>FirstName</th>
+                    <th>LastName</th>
+                    <th>ShipToName</th>
+                    <th>ShipToStreet</th>
+                    <th>ShipToCity</th>
+                    <th>ShipToState</th>
+                    <th>ShipToCntryCode</th>
+                    <th>ShipToZip</th>
+                    <th>AddressStatus</th>
+                    <th>TotalAmt</th>
+                    <th>CurrencyCode</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="order in orders">
+                    <td><a ui-sref="order.detail({id:order.id})">{{order.id}}</a></td>
+                    <td>{{order.coreArticleId}}</td>
+                    <td>{{order.transationId}}</td>
+                    <td>{{order.paymentStatus}}</td>
+                    <td>{{order.email}}</td>
+                    <td>{{order.payerId}}</td>
+                    <td>{{order.payerStatus}}</td>
+                    <td>{{order.firstName}}</td>
+                    <td>{{order.lastName}}</td>
+                    <td>{{order.shipToName}}</td>
+                    <td>{{order.shipToStreet}}</td>
+                    <td>{{order.shipToCity}}</td>
+                    <td>{{order.shipToState}}</td>
+                    <td>{{order.shipToCntryCode}}</td>
+                    <td>{{order.shipToZip}}</td>
+                    <td>{{order.addressStatus}}</td>
+                    <td>{{order.totalAmt}}</td>
+                    <td>{{order.currencyCode}}</td>
+                    <td>
+                        <button type="submit"
+                                ui-sref="order.detail({id:order.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span> View</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="order.edit({id:order.id})"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span> Edit</span>
+                        </button>
+                        <button type="submit"
+                                ng-click="delete(order.id)"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span> Delete</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

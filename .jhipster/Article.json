@@ -1,0 +1,61 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "coreId",
+            "fieldType": "Long",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "code",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "price",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "deliveryCosts",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldId": 7,
+            "fieldName": "currency",
+            "fieldType": "Currency",
+            "fieldValues": "EUR,GBP,USD,CHF"
+        },
+        {
+            "fieldId": 8,
+            "fieldName": "image1",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        },
+        {
+            "fieldId": 9,
+            "fieldName": "image2",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        }
+    ],
+    "dto": "no",
+    "pagination": "no"
+}

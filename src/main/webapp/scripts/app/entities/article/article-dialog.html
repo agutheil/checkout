@@ -1,0 +1,138 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myArticleLabel">Create or edit a Article</h4>
+    </div>
+    <div class="modal-body">
+        <jh-alert-error></jh-alert-error>
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="article.id" readonly>
+        </div>
+
+        <div class="form-group">
+            <label for="field_coreId">CoreId</label>
+            <input type="number" class="form-control" name="coreId" id="field_coreId"
+                    ng-model="article.coreId"
+                    required>
+
+            <div ng-show="editForm.coreId.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.coreId.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.coreId.$error.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="field_code">Code</label>
+            <input type="text" class="form-control" name="code" id="field_code"
+                    ng-model="article.code"
+                    required>
+
+            <div ng-show="editForm.code.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.code.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                    ng-model="article.name"
+                    >
+
+        </div>
+        <div class="form-group">
+            <label for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                    ng-model="article.description"
+                    >
+
+        </div>
+        <div class="form-group">
+            <label for="field_price">Price</label>
+            <input type="number" class="form-control" name="price" id="field_price"
+                    ng-model="article.price"
+                    >
+
+        </div>
+        <div class="form-group">
+            <label for="field_deliveryCosts">DeliveryCosts</label>
+            <input type="number" class="form-control" name="deliveryCosts" id="field_deliveryCosts"
+                    ng-model="article.deliveryCosts"
+                    >
+
+        </div>
+        <div class="form-group">
+            <label for="field_currency">Currency</label>
+            <select class="form-control" name="currency" ng-model="article.currency" id="field_currency">
+                <option value="EUR">EUR</option>
+                <option value="GBP">GBP</option>
+                <option value="USD">USD</option>
+                <option value="CHF">CHF</option>
+            </select>
+
+        </div>
+        <div class="form-group" ngf-drop ngf-change="setImage1($files, article)" ngf-accept="'image/*'">
+            <label for="field_image1">Image1</label>
+            <div>
+                <img data-ng-src="{{'data:image/*;base64,' + article.image1}}" style="max-height: 100px;" ng-if="article.image1"/>
+                <div class="help-block clearfix">
+                    <span class="pull-left">{{byteSize(article.image1)}}</span>
+                    <button ng-click="article.image1=null"
+                            ng-if="article.image1"
+                            class="btn btn-default btn-xs pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+                <button type="file" ngf-select class="btn btn-default btn-block"
+                        ngf-change="setImage1($files, article)" accept="image/*">
+                    Add image
+                </button>
+            </div>
+            <input type="hidden" class="form-control" name="image1" id="field_image1"
+                    ng-model="article.image1"
+                    >
+
+        </div>
+        <div class="form-group" ngf-drop ngf-change="setImage2($files, article)" ngf-accept="'image/*'">
+            <label for="field_image2">Image2</label>
+            <div>
+                <img data-ng-src="{{'data:image/*;base64,' + article.image2}}" style="max-height: 100px;" ng-if="article.image2"/>
+                <div class="help-block clearfix">
+                    <span class="pull-left">{{byteSize(article.image2)}}</span>
+                    <button ng-click="article.image2=null"
+                            ng-if="article.image2"
+                            class="btn btn-default btn-xs pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+                <button type="file" ngf-select class="btn btn-default btn-block"
+                        ngf-change="setImage2($files, article)" accept="image/*">
+                    Add image
+                </button>
+            </div>
+            <input type="hidden" class="form-control" name="image2" id="field_image2"
+                    ng-model="article.image2"
+                    >
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || editForm.$submitted" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,96 @@
+<div>
+
+    <h2>Articles</h2>
+    <jh-alert></jh-alert>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn btn-primary" ui-sref="article.new">
+                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new Article</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteArticleConfirmation">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form name="deleteForm" ng-submit="confirmDelete(article.id)">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                                ng-click="clear()">&times;</button>
+                        <h4 class="modal-title">Confirm delete operation</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to delete this Article?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+                            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+                        </button>
+                        <button type="submit" ng-disabled="deleteForm.$invalid" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span>Delete</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>CoreId</th>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>DeliveryCosts</th>
+                    <th>Currency</th>
+                    <th>Image1</th>
+                    <th>Image2</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="article in articles">
+                    <td><a ui-sref="article.detail({id:article.id})">{{article.id}}</a></td>
+                    <td>{{article.coreId}}</td>
+                    <td>{{article.code}}</td>
+                    <td>{{article.name}}</td>
+                    <td>{{article.description}}</td>
+                    <td>{{article.price}}</td>
+                    <td>{{article.deliveryCosts}}</td>
+                    <td>{{article.currency}}</td>
+                    <td>
+                        <img data-ng-src="{{'data:image/*;base64,' + article.image1}}" style="max-height: 30px;" ng-if="article.image1"/>
+                        {{byteSize(article.image1)}}
+                    </td>
+                    <td>
+                        <img data-ng-src="{{'data:image/*;base64,' + article.image2}}" style="max-height: 30px;" ng-if="article.image2"/>
+                        {{byteSize(article.image2)}}
+                    </td>
+                    <td>
+                        <button type="submit"
+                                ui-sref="article.detail({id:article.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span> View</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="article.edit({id:article.id})"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span> Edit</span>
+                        </button>
+                        <button type="submit"
+                                ng-click="delete(article.id)"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span> Delete</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
