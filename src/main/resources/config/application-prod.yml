@@ -9,7 +9,7 @@ spring:
         active: prod
     data:
         mongodb:
-            host: localhost
+            host: mng
             port: 27017
             database: checkout
     thymeleaf:

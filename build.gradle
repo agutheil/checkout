@@ -4,10 +4,10 @@ buildscript {
         jcenter()
     }
     dependencies {
-      	classpath ('se.transmode.gradle:gradle-docker:1.2')
         classpath('org.springframework.boot:spring-boot-gradle-plugin:1.2.5.RELEASE')
         classpath('com.moowork.gradle:gradle-node-plugin:0.10')
         classpath('com.moowork.gradle:gradle-grunt-plugin:0.10')
+        classpath ('se.transmode.gradle:gradle-docker:1.2')
     }
 }
 
@@ -27,6 +27,13 @@ bootRepackage {
 springBoot {
     mainClass = 'com.mightymerce.checkout.Application'
 }
+
+task copyPublicDir(type: Copy) {
+    from 'src/main/webapp/'
+    into 'build/resources/main/public'
+}
+
+jar.dependsOn copyPublicDir
 
 bootRun {
     addResources = false
@@ -144,8 +151,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-social-facebook")
     compile group: 'org.springframework.security', name: 'spring-security-crypto', version: spring_security_version
     compile("org.springframework.boot:spring-boot-starter-data-rest")
-    
-    
+     
     testCompile group: 'com.jayway.awaitility', name: 'awaitility', version: awaility_version
     testCompile group: 'com.jayway.jsonpath', name: 'json-path'
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
@@ -161,10 +167,6 @@ dependencies {
 
 }
 
-distDocker {
-    exposePort 80
-    dryRun true
-}
 
 clean {
     delete "target"

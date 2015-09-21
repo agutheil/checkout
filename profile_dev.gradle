@@ -8,6 +8,11 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-tomcat', version: spring_boot_version
 }
 
+distDocker {
+    exposePort 8081
+    dryRun true
+}
+
 bootRun {
   args = ["--spring.profiles.active=dev"]
 }
