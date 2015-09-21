@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
  * Created by agutheil on 11.05.15.
  */
 @Configuration
-public class MyConfig {
+public class CoreConfig {
 
 	 @Value("${mightymerce.coreUrl}")
 	private String coreUrl;
