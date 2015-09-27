@@ -28,16 +28,16 @@ public class CoreArticleImporter {
 	
 	@Scheduled(fixedRate = 5000)
 	public void importArticles() {
-		log.info("Importing Articles from core ...");
+		log.debug("Importing Articles from core ...");
 		List<CoreArticle> coreArticles = coreArticleRepository.retrieveArticles();
 		for (CoreArticle coreArticle : coreArticles) {
-			log.info("Importing article with articleId "+coreArticle.getId());
+			log.debug("Importing article with articleId "+coreArticle.getId());
 			Article article = articleRepository.findByCoreId(coreArticle.getId());
 			if ( article == null) {
-				log.info("Creating article ...");
+				log.debug("Creating article ...");
 				article = converter.convert(new Article(), coreArticle);
 			} else {
-				log.info("Updating article ...");
+				log.debug("Updating article ...");
 				article = converter.convert(article, coreArticle);
 			}
 			articleRepository.save(article);
